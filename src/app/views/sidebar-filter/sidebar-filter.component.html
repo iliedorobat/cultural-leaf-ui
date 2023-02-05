@@ -1,0 +1,122 @@
+<div class="offcanvas-header">
+    <h5 class="offcanvas-title">Atlas Filter</h5>
+    <button
+            type="button"
+            class="btn-close text-reset"
+            aria-label="Close"
+            (click)="activeOffcanvas.dismiss('Cross click')"
+    ></button>
+</div>
+
+<div class="offcanvas-body">
+<!--    was-validated -->
+    <div class="card counter-card" (click)="openCHOsModal()">
+        <div class="card-body">
+            Results: {{ choCounter | number }} CHOs
+        </div>
+    </div>
+
+    <form class="needs-validation" [formGroup]="form" (submit)="onSubmit()">
+        <ngb-accordion activeIds="general-info-filter">
+            <ngb-panel id="general-info-filter" title="Main CHOs Filter">
+                <ng-template ngbPanelContent>
+                    <lmap-sidebar-general-info-filter [filter]="filter" [form]="form"></lmap-sidebar-general-info-filter>
+                </ng-template>
+            </ngb-panel>
+
+            <ngb-panel title="Current Location">
+                <ng-template ngbPanelContent>
+                    <lmap-sidebar-location-filter [filter]="filter" [form]="form"></lmap-sidebar-location-filter>
+                </ng-template>
+            </ngb-panel>
+
+            <ngb-panel title="Creation Period (Interval)">
+                <ng-template ngbPanelContent>
+                    <lmap-sidebar-events-filter [filterInterval]="filter.creationInterval" [form]="form"></lmap-sidebar-events-filter>
+                </ng-template>
+            </ngb-panel>
+
+            <ngb-panel title="Finding Period (Interval)">
+                <ng-template ngbPanelContent>
+                    <lmap-sidebar-events-filter [filterInterval]="filter.foundInterval" [form]="form"></lmap-sidebar-events-filter>
+                </ng-template>
+            </ngb-panel>
+        </ngb-accordion>
+
+        <ngb-accordion activeIds="">
+<!--            <ngb-panel title="Epoch">-->
+<!--                <ng-template ngbPanelContent>-->
+<!--                    <lmap-sidebar-epoch-filter [filter]="filter" [form]="form"></lmap-sidebar-epoch-filter>-->
+<!--                </ng-template>-->
+<!--            </ngb-panel>-->
+
+            <ngb-panel title="Medal Filter">
+                <ng-template ngbPanelContent>
+                    <lmap-sidebar-medal-filter [filter]="filter" [form]="form"></lmap-sidebar-medal-filter>
+                </ng-template>
+            </ngb-panel>
+
+            <ngb-panel title="Natural Science Filter">
+                <ng-template ngbPanelContent>
+                    <lmap-sidebar-natural-science-filter [filter]="filter" [form]="form"></lmap-sidebar-natural-science-filter>
+                </ng-template>
+            </ngb-panel>
+        </ngb-accordion>
+
+        <div class="form-footer">
+            <button class="btn btn-md btn-success" type="submit">Apply Filter</button>
+            <button class="btn btn-md btn-secondary" type="reset" (click)="form.reset()">Reset Filter</button>
+        </div>
+    </form>
+</div>
+
+
+
+
+<!--        <li>edm:currentLocation (http://opendata.cs.pub.ro/resource/Organization/country:Romania/county:Calarasi/Gumelnita_Civilisation_Museum/)</li>-->
+
+
+<!--        TODO: odp:geologicalPeriod => dcterms:temporal (stiintele naturii)<br/><br/>-->
+<!--        Filter CHOs by:<br/>-->
+<!--        <ul>-->
+<!--            <li>locality name</li>-->
+<!--            <li>locality code (siruta)</li>-->
+
+<!--&lt;!&ndash;            <li>county</li>&ndash;&gt;-->
+<!--&lt;!&ndash;            <li>dc:title (RO ONLY: Colier, Cap de statuetă)</li>&ndash;&gt;-->
+<!--&lt;!&ndash;            <li>odp:inventoryNumber (B/640, D 4479)</li>&ndash;&gt;-->
+<!--&lt;!&ndash;            <li>odp:displayState (RO ONLY: bună, mediocră)</li>&ndash;&gt;-->
+<!--&lt;!&ndash;            <li>dc:type (artefact, man-made object)</li>&ndash;&gt;-->
+<!--&lt;!&ndash;            <li>&ndash;&gt;-->
+<!--&lt;!&ndash;                edm:wasPresentAt ("http://opendata.cs.pub.ro/resource/Event/Finding/CIMEC/57DAC35D2E1D4429ACB0B6A94E09C975)&ndash;&gt;-->
+<!--&lt;!&ndash;                TODO: subquery&ndash;&gt;-->
+<!--&lt;!&ndash;            </li>&ndash;&gt;-->
+<!--&lt;!&ndash;            <li>odp:found (similar with edm:wasPresentAt for Finding event type)</li>&ndash;&gt;-->
+<!--&lt;!&ndash;            <li>dcterms:created (similar with edm:wasPresentAt for Production event type)</li>&ndash;&gt;-->
+<!--&lt;!&ndash;            <li>dcterms:issued => dcterms:created</li>&ndash;&gt;-->
+<!--&lt;!&ndash;            <li>dcterms:temporal (Eneolitic, Epoca bronzului)</li>&ndash;&gt;-->
+<!--&lt;!&ndash;            <li>odp:form (RO ONLY: circulară, cruce repetată)</li>&ndash;&gt;-->
+
+<!--            <li>edm:hasType (RO ONLY: Ceramică, arheologie)</li>-->
+<!--            <li>dc:subject (RO ONLY: Farfurie, Farfurie cu dragon, Brățară)</li>-->
+<!--            <li>edm:isRelatedTo (culture: geto-dacică, culture: carpică, culture: Cucuteni)</li>-->
+<!--            <li>dcterms:medium (RO ONLY: aur, batere, nituire, turnare)</li>-->
+<!--            <li>-->
+<!--                edm:hasMet (-->
+<!--                    http://opendata.cs.pub.ro/resource/Agent/H_Weichmann-->
+<!--                    http://opendata.cs.pub.ro/resource/Place/country:Romania/locality:Odorheiu_Secuiesc/-->
+<!--                )-->
+<!--                TODO: create a map containing all places?-->
+<!--            </li>-->
+
+
+<!--&lt;!&ndash;            <li>odp:age (RO ONLY - stiintele naturii - AD (adult), 23 MIL)</li>&ndash;&gt;-->
+<!--&lt;!&ndash;            <li>dbo:sex (RO ONLY - stiintele naturii - femelă, mascul)</li>&ndash;&gt;-->
+<!--            <li>odp:biotope (RO ONLY - stiintele naturii - Munții (zone montane), câmpie, Râpe)</li>-->
+<!--            <li>odp:chemicalComposition (RO ONLY - stiintele naturii - SiO2, Silvanit; (Ag, Au)Te2, Au, SiO2, XS, CaSO4)</li>-->
+<!--&lt;!&ndash;            <li>odp:geologicalPeriod (RO ONLY - stiintele naturii - neogen, Pleistocen mediu)</li>&ndash;&gt;-->
+
+<!--            <li>odp:fineness ???</li>-->
+<!--            <li>odp:overallDescription ???</li>-->
+<!--            <li>dc:description ??? de ce nu exista in seturile de date ???</li>-->
+<!--        </ul>-->

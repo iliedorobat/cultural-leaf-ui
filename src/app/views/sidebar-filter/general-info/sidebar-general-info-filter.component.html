@@ -1,0 +1,58 @@
+<div [formGroup]="form">
+    <div class="row">
+        <div class="col-md-12 mb-3">
+            <input
+                    class="form-control form-control-sm"
+                    type="text"
+                    id="title"
+                    placeholder="Title of the CHO"
+                    formControlName="title"
+                    [(ngModel)]="filter.title"
+            />
+<!--            TODO: form control validation -->
+<!--            <div *ngIf="title?.errors?.['minlength']">Exceed max length of 10</div>-->
+<!--            <div class="invalid-tooltip">-->
+<!--                Please provide a proper title.-->
+<!--            </div>-->
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 mb-3">
+            <input
+                    class="form-control form-control-sm"
+                    type="text"
+                    id="inventoryNumber"
+                    placeholder="Inventory number of the CHO"
+                    formControlName="inventoryNumber"
+                    [(ngModel)]="filter.inventoryNumber"
+            />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <select
+                    class="form-select form-select-sm"
+                    id="displayState"
+                    formControlName="displayState"
+                    [(ngModel)]="filter.displayState"
+            >
+                <option [ngValue]="null" selected disabled>State of CHOs</option>
+                <option *ngFor="let displayState of CHO_DISPLAY_STATES" [ngValue]="displayState">{{ displayState }}</option>
+            </select>
+        </div>
+
+        <div class="col-md-6">
+            <select
+                    class="form-select form-select-sm"
+                    id="type"
+                    formControlName="type"
+                    [(ngModel)]="filter.type"
+            >
+                <option [ngValue]="null" selected disabled>Type of CHOs</option>
+                <option *ngFor="let choType of CHO_TYPES" [ngValue]="choType">{{ choType }}</option>
+            </select>
+        </div>
+    </div>
+</div>

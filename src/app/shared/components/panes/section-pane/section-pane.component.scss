@@ -1,0 +1,19 @@
+.section-pane {
+    > .title {
+        margin: 0 0 1rem 0;
+        font-size: 1.1em;
+        font-weight: 600;
+    }
+
+    > .content {
+        margin-top: 1rem / 2;
+    }
+}
+
+//:host {
+//    &:not(:first-child) {
+//        > .section-pane > .title {
+//            margin: 1rem 0;
+//        }
+//    }
+//}

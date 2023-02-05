@@ -1,0 +1,46 @@
+<div [formGroup]="form">
+    <div class="row">
+        <div class="col-md-12 mb-3">
+            <label>Age</label>
+            <select
+                    class="form-select form-select-sm"
+                    id="natureAge"
+                    formControlName="natureAge"
+                    [(ngModel)]="filter.natureFilter.age"
+            >
+                <option [ngValue]="null" selected disabled>Select the age</option>
+                <option *ngFor="let age of NATURE_AGES" [ngValue]="age">{{ age }}</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 mb-3">
+            <label>Epoch</label>
+            <select
+                    class="form-select form-select-sm"
+                    id="natureEpoch"
+                    formControlName="natureEpoch"
+                    [(ngModel)]="filter.natureFilter.epoch"
+            >
+                <option [ngValue]="null" selected disabled>Select the Epoch</option>
+                <option *ngFor="let epoch of NATURE_EPOCHS" [ngValue]="epoch">{{ epoch }}</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 mb-3">
+            <label>Sex</label>
+            <select
+                    class="form-select form-select-sm"
+                    id="natureSex"
+                    formControlName="natureSex"
+                    [(ngModel)]="filter.natureFilter.sex"
+            >
+                <option [ngValue]="null" selected disabled>Select the sex</option>
+                <option *ngFor="let sex of NATURE_SEXES" [ngValue]="sex">{{ sex }}</option>
+            </select>
+        </div>
+    </div>
+</div>

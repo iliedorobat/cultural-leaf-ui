@@ -1,0 +1,14 @@
+@import 'src/assets/styles/variables';
+
+.modal {
+    > .modal-dialog {
+        &:not(.modal-fullscreen) {
+            height: calc(100% - 2 * #{$bootstrap-modal-margin});
+
+            > .modal-content {
+                height: 100%;
+                overflow: hidden;
+            }
+        }
+    }
+}

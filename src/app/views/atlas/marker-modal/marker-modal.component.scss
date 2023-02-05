@@ -1,0 +1,31 @@
+@import 'src/assets/styles/variables';
+
+$row-padding: 1rem / 8;
+
+:host {
+    height: 100%;
+
+    .modal-body {
+        font-size: 14px;
+
+        .row {
+            &:first-of-type {
+                padding-bottom: $row-padding;
+            }
+            &:last-of-type {
+                padding-top: $row-padding;
+            }
+            &:not(:first-of-type, :last-of-type) {
+                padding: $row-padding 0;
+            }
+
+            > .label {
+                font-weight: 600;
+            }
+
+            > .value {
+                overflow-wrap: break-word;
+            }
+        }
+    }
+}

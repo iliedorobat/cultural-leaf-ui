@@ -1,0 +1,16 @@
+<!-- TODO: form control validation: disable epoch if creation period is selected -->
+<div [formGroup]="form">
+    <div class="row">
+        <div class="col-md-12">
+            <select
+                    class="form-select form-select-sm"
+                    id="epoch"
+                    formControlName="epoch"
+                    [(ngModel)]="filter.epoch"
+            >
+                <option [ngValue]="null" selected disabled>Select the Epoch</option>
+                <option *ngFor="let epoch of RO_EPOCHS" [ngValue]="epoch">{{ epoch }}</option>
+            </select>
+        </div>
+    </div>
+</div>

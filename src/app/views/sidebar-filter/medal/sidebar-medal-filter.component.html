@@ -1,0 +1,16 @@
+<div [formGroup]="form">
+    <div class="row">
+        <div class="col-md-12 mb-3">
+            <label>Medal Form</label>
+            <select
+                    class="form-select form-select-sm"
+                    id="medalShape"
+                    formControlName="medalShape"
+                    [(ngModel)]="filter.medalFilter.shape"
+            >
+                <option [ngValue]="null" selected disabled>Select the shape</option>
+                <option *ngFor="let form of MEDAL_FORMS" [ngValue]="form">{{ form }}</option>
+            </select>
+        </div>
+    </div>
+</div>

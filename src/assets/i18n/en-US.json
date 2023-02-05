@@ -1,0 +1,59 @@
+{
+    "app.name": "Cultural Leaf",
+
+    "markerModal.section.title.mainInfo": "General Information",
+    "markerModal.section.title.building": "Building",
+    "markerModal.section.title.collection": "Collection",
+    "markerModal.section.title.contact": "Contact",
+    "markerModal.section.title.description": "Description",
+    "markerModal.section.title.location": "Location",
+    "markerModal.section.title.publications": "Publications",
+    
+    "markerModal.section.subtitle.building.description": "Description",
+    "markerModal.section.subtitle.building.lmiCode": "LMI Code",
+
+    "markerModal.section.subtitle.collection.category": "Category",
+    "markerModal.section.subtitle.collection.importance": "Importance",
+    "markerModal.section.subtitle.collection.pictureList": "Pictures",
+    "markerModal.section.subtitle.collection.profile": "Profile",
+
+    "markerModal.section.subtitle.contact.agent.name": "Employee Name",
+    "markerModal.section.subtitle.contact.agent.position": "Employee Position",
+    "markerModal.section.subtitle.contact.director": "Director",
+    "markerModal.section.subtitle.contact.emailList": "Email",
+    "markerModal.section.subtitle.contact.faxList": "Fax",
+    "markerModal.section.subtitle.contact.socialMediaList": "Social Media",
+    "markerModal.section.subtitle.contact.phoneList": "Phone",
+    "markerModal.section.subtitle.contact.timetableList": "Timetable",
+    "markerModal.section.subtitle.contact.virtualTourList": "Virtual Tour",
+    "markerModal.section.subtitle.contact.websiteList": "Website",
+
+    "markerModal.section.subtitle.description.details": "Description",
+    "markerModal.section.subtitle.description.historic": "Historic",
+    "markerModal.section.subtitle.description.summary": "Summary",
+
+    "markerModal.section.subtitle.location.access": "Access",
+    "markerModal.section.subtitle.location.address": "Address",
+    "markerModal.section.subtitle.location.administrative": "Administrative Unit",
+    "markerModal.section.subtitle.location.commune": "Commune",
+    "markerModal.section.subtitle.location.county": "County",
+    "markerModal.section.subtitle.location.geolocation": "Geolocation",
+    "markerModal.section.subtitle.location.geolocation.latitude": "Latitude",
+    "markerModal.section.subtitle.location.geolocation.longitude": "Longitude",
+    "markerModal.section.subtitle.location.geolocation.type": "Target",
+    "markerModal.section.subtitle.location.locality.name": "Name",
+    "markerModal.section.subtitle.location.locality.siruta": "Siruta Code",
+    "markerModal.section.subtitle.location.postalCode": "Postal Code",
+
+    "markerModal.section.subtitle.mainInfo.accreditationList": "Accreditation",
+    "markerModal.section.subtitle.mainInfo.cimec": "CIMEC Code",
+    "markerModal.section.subtitle.mainInfo.cimecUriList": "CIMEC Website",
+    "markerModal.section.subtitle.mainInfo.entityType": "Entity Type",
+    "markerModal.section.subtitle.mainInfo.name": "Name",
+    "markerModal.section.subtitle.mainInfo.founded": "Founded",
+    "markerModal.section.subtitle.mainInfo.partOf": "Subdivision of",
+    "markerModal.section.subtitle.mainInfo.supervisedBy": "Supervised by",
+    "markerModal.section.subtitle.mainInfo.supervisorForList": "Supervisor for",
+
+    "markerModal.section.subtitle.publications": "Publications"
+}

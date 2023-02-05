@@ -1,0 +1,53 @@
+<div [formGroup]="form">
+    <div class="row">
+        <div class="col-md-4 mb-3">
+            <label>From</label>
+            <input
+                    class="form-control form-control-sm"
+                    type="number"
+                    id="startDate"
+                    formControlName="startDate"
+                    [(ngModel)]="filterInterval.start.date"
+            />
+        </div>
+
+        <div class="col-md-8 mb-3">
+            <label>Range</label>
+            <select
+                    class="form-select form-select-sm"
+                    id="startRange"
+                    formControlName="startRange"
+                    [(ngModel)]="filterInterval.start.range"
+            >
+                <option [ngValue]="null" selected disabled>Select the range</option>
+                <option *ngFor="let range of DATE_RANGES" [ngValue]="range">{{ range }}</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 mb-3">
+            <label>To</label>
+            <input
+                    class="form-control form-control-sm"
+                    type="number"
+                    id="endDate"
+                    formControlName="endDate"
+                    [(ngModel)]="filterInterval.end.date"
+            />
+        </div>
+
+        <div class="col-md-8 mb-3">
+            <label>Range</label>
+            <select
+                    class="form-select form-select-sm"
+                    id="endRange"
+                    formControlName="endRange"
+                    [(ngModel)]="filterInterval.end.range"
+            >
+                <option [ngValue]="null" selected disabled>Select the range</option>
+                <option *ngFor="let range of DATE_RANGES" [ngValue]="range">{{ range }}</option>
+            </select>
+        </div>
+    </div>
+</div>

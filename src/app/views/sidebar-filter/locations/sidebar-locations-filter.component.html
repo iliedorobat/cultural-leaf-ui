@@ -1,0 +1,27 @@
+<div [formGroup]="form">
+    <div class="row">
+        <div class="col-md-6">
+            <select
+                    class="form-select form-select-sm"
+                    id="county"
+                    formControlName="county"
+                    [(ngModel)]="filter.county"
+            >
+                <option [ngValue]="null" selected disabled>Select the county</option>
+                <option *ngFor="let county of COUNTIES" [ngValue]="county">{{ county }}</option>
+            </select>
+        </div>
+
+<!--        <div class="col-md-6">-->
+<!--            <select-->
+<!--                    class="form-select form-select-sm"-->
+<!--                    id="locality"-->
+<!--                    formControlName="locality"-->
+<!--                    [(ngModel)]="filter.locality"-->
+<!--            >-->
+<!--                <option [ngValue]="null" selected disabled>Select the locality</option>-->
+<!--                <option *ngFor="let locality of LOCALITIES" [ngValue]="locality">{{ locality }}</option>-->
+<!--            </select>-->
+<!--        </div>-->
+    </div>
+</div>
