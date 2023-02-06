@@ -1,11 +1,12 @@
-import {BehaviorSubject, Observable} from 'rxjs';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {BehaviorSubject, map, Observable} from 'rxjs';
+import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 
 import {Museum} from '../types/museum/Museum';
 import {MuseumSummary} from '../types/museum/MuseumSummary';
 import {CHO_ENDPOINT, HTTP_OPTIONS, MUSEUM_ENDPOINT} from './backend.const';
-import {SidebarCHOFilter} from '../../views/sidebar-filter/SidebarCHOFilter';
+import {CHOFilter} from '../types/cho/CHOFilter';
+import {CHOSummary} from '../types/cho/CHOSummary';
 import {Counter} from '../types/Counter';
 
 @Injectable({
@@ -18,21 +19,22 @@ export class BackendService {
     }
 
     public museumsSummaries$: BehaviorSubject<MuseumSummary[]> = new BehaviorSubject<MuseumSummary[]>([]);
-    public choCount$: BehaviorSubject<Counter> = new BehaviorSubject<Counter>({count: 0} as Counter);
+    private _choCount$: BehaviorSubject<Counter> = new BehaviorSubject<Counter>({count: 0} as Counter);
+    private _chosSummaries$: BehaviorSubject<CHOSummary[]> = new BehaviorSubject<CHOSummary[]>([]);
 
-    public retrieveChoCounter(payload: SidebarCHOFilter | any) {
+    public retrieveChoCounter(payload: CHOFilter | any) {
         return this.http.post(CHO_ENDPOINT + "?aggr=count", payload, HTTP_OPTIONS);
     }
 
-    public filterCHO(payload: SidebarCHOFilter | any) {
-        return this.http.post<any>(CHO_ENDPOINT, payload, HTTP_OPTIONS);
+    public getCHOSummaries(payload: CHOFilter): Observable<any[]> {
+        return this.http.post<CHOSummary[]>(CHO_ENDPOINT, payload, HTTP_OPTIONS);
     }
 
     public getMuseum(uri: string): Observable<Museum> {
         return this.http.post<Museum>(`${MUSEUM_ENDPOINT}?uri=${uri}`, null, HTTP_OPTIONS);
     }
 
-    public getMuseums(payload: SidebarCHOFilter): Observable<MuseumSummary[]> {
+    public getMuseums(payload: CHOFilter): Observable<MuseumSummary[]> {
         return this.http.post<MuseumSummary[]>(MUSEUM_ENDPOINT, payload, HTTP_OPTIONS);
     }
 
@@ -40,17 +42,34 @@ export class BackendService {
         //
     }
 
-    public choCounterSubscription(payload: SidebarCHOFilter | any) {
+    public choCounterSubscription(payload: CHOFilter | any) {
         this.retrieveChoCounter(payload)
             .subscribe((data: any) => {
-                this.choCount$.next(data);
+                this._choCount$.next(data);
             });
     }
 
-    public museumsSubscription(payload: SidebarCHOFilter | any) {
+    public museumsSubscription(payload: CHOFilter | any) {
         this.getMuseums(payload)
             .subscribe((data: MuseumSummary[]) => {
                 this.museumsSummaries$.next(data);
             });
+    }
+
+    public chosSubscription(payload: CHOFilter | any) {
+        this.getCHOSummaries(payload)
+            .subscribe((data: CHOSummary[]) => {
+                this._chosSummaries$.next(data);
+            });
+    }
+
+    get totalCHOs$() {
+        return this._choCount$.asObservable().pipe(
+            map(item => item.count)
+        );
+    }
+
+    get chosSummaries$() {
+        return this._chosSummaries$.asObservable();
     }
 }

@@ -1,14 +1,14 @@
 import {Component, Input} from '@angular/core';
 import {FormGroup} from '@angular/forms';
 
-import {SidebarCHOFilter, COUNTIES} from '../SidebarCHOFilter';
+import {CHOFilter, COUNTIES} from '../../../../shared/types/cho/CHOFilter';
 
 @Component({
-    selector: 'lmap-sidebar-location-filter',
-    templateUrl: './sidebar-locations-filter.component.html'
+    selector: 'lmap-locations-cho-filter',
+    templateUrl: './locations-cho-filter.component.html'
 })
-export class SidebarLocationsFilterComponent {
-    @Input() filter: SidebarCHOFilter;
+export class LocationsChoFilterComponent {
+    @Input() filter: CHOFilter;
     @Input() form: FormGroup;
 
     COUNTIES = Object.values(COUNTIES);

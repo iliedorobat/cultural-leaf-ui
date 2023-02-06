@@ -1,4 +1,4 @@
-export class SidebarCHOFilter {
+export class CHOFilter {
     public county: COUNTIES | null = null;
     public creationInterval: FilterInterval = new FilterInterval();
     public displayState: CHO_DISPLAY_STATES | null = null;

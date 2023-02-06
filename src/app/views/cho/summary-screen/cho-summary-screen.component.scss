@@ -1,0 +1,13 @@
+:host {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+
+    .table-wrapper {
+        padding: 0 32px;
+
+        > .pagination-section {
+            margin-bottom: 1rem;
+        }
+    }
+}

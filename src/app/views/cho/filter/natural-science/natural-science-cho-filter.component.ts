@@ -1,14 +1,14 @@
 import {Component, Input} from '@angular/core';
 import {FormGroup} from '@angular/forms';
 
-import {SidebarCHOFilter, NATURE_AGES, NATURE_EPOCHS, NATURE_SEXES} from '../SidebarCHOFilter';
+import {CHOFilter, NATURE_AGES, NATURE_EPOCHS, NATURE_SEXES} from '../../../../shared/types/cho/CHOFilter';
 
 @Component({
-    selector: 'lmap-sidebar-natural-science-filter',
-    templateUrl: './sidebar-natural-science-filter.component.html'
+    selector: 'lmap-natural-science-cho-filter',
+    templateUrl: './natural-science-cho-filter.component.html'
 })
-export class SidebarNaturalScienceFilterComponent {
-    @Input() filter: SidebarCHOFilter;
+export class NaturalScienceChoFilterComponent {
+    @Input() filter: CHOFilter;
     @Input() form: FormGroup;
 
     NATURE_AGES = Object.values(NATURE_AGES);

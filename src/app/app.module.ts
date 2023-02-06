@@ -15,7 +15,9 @@ import {StrService} from './shared/services/str.service';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {AtlasComponent} from './views/atlas/atlas.component';
-import {ChosModalComponent} from './views/cho-list-modal/chos-modal.component';
+import {CHOFilterComponent} from './views/cho/filter/cho-filter.component';
+import {CHOSummaryScreenComponent} from './views/cho/summary-screen/cho-summary-screen.component';
+import {DecimalPipe} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HorizontalLineComponent} from './shared/components/horizontal-line/horizontal-line';
 import {MarkerModalComponent} from './views/atlas/marker-modal/marker-modal.component';
@@ -27,13 +29,14 @@ import {
     MarkerModalSectionValuePipe
 } from './views/atlas/marker-modal/maker-modal.pipe';
 import {SectionPaneComponent} from './shared/components/panes/section-pane/section-pane.component';
-import {SidebarFilterComponent} from './views/sidebar-filter/sidebar-filter.component';
-import {SidebarEventsFilterComponent} from './views/sidebar-filter/events/sidebar-events-filter.component';
-import {SidebarEpochFilterComponent} from './views/sidebar-filter/epoch/sidebar-epoch-filter.component';
-import {SidebarGeneralInfoFilterComponent} from './views/sidebar-filter/general-info/sidebar-general-info-filter.component';
-import {SidebarLocationsFilterComponent} from './views/sidebar-filter/locations/sidebar-locations-filter.component';
-import {SidebarMedalFilterComponent} from './views/sidebar-filter/medal/sidebar-medal-filter.component';
-import {SidebarNaturalScienceFilterComponent} from './views/sidebar-filter/natural-science/sidebar-natural-science-filter.component';
+import {SidebarComponent} from './views/sidebar/sidebar.component';
+import {EventsChoFilterComponent} from './views/cho/filter/events/events-cho-filter.component';
+import {EpochChoFilterComponent} from './views/cho/filter/epoch/epoch-cho-filter.component';
+import {GeneralInfoChoFilterComponent} from './views/cho/filter/general-info/general-info-cho-filter.component';
+import {LocationsChoFilterComponent} from './views/cho/filter/locations/locations-cho-filter.component';
+import {MedalChoFilterComponent} from './views/cho/filter/medal/medal-cho-filter.component';
+import {NaturalScienceChoFilterComponent} from './views/cho/filter/natural-science/natural-science-cho-filter.component';
+import {SortableHeader} from './shared/components/table/sortable.directive';
 
 // AoT requires an exported function for factories: https://github.com/ngx-translate/core
 export function HttpLoaderFactory(http: HttpClient) {
@@ -44,7 +47,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     declarations: [
         AppComponent,
         AtlasComponent,
-        ChosModalComponent,
+        CHOFilterComponent,
+        CHOSummaryScreenComponent,
         HorizontalLineComponent,
         MarkerModalComponent,
         MarkerModalMuseumPayloadPipe,
@@ -53,16 +57,16 @@ export function HttpLoaderFactory(http: HttpClient) {
         MarkerModalSectionTitlePipe,
         MarkerModalSectionValuePipe,
         SectionPaneComponent,
-        SidebarFilterComponent,
-        SidebarEventsFilterComponent,
-        SidebarEpochFilterComponent,
-        SidebarGeneralInfoFilterComponent,
-        SidebarLocationsFilterComponent,
-        SidebarMedalFilterComponent,
-        SidebarNaturalScienceFilterComponent
+        SidebarComponent,
+        EventsChoFilterComponent,
+        EpochChoFilterComponent,
+        GeneralInfoChoFilterComponent,
+        LocationsChoFilterComponent,
+        MedalChoFilterComponent,
+        NaturalScienceChoFilterComponent
     ],
     entryComponents: [
-        ChosModalComponent,
+        CHOSummaryScreenComponent,
         MarkerModalComponent
     ],
     // exports: [
@@ -83,11 +87,13 @@ export function HttpLoaderFactory(http: HttpClient) {
         LeafletModule,
         NgbModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        SortableHeader
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
     providers: [
         AtlasService,
+        DecimalPipe,
         HttpService,
         MarkerModalService,
         StrService

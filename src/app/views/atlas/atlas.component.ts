@@ -4,8 +4,8 @@ import {GeoJSON, Layer, Map} from 'leaflet';
 import {Observable, Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 
-import {SidebarCHOFilter} from '../sidebar-filter/SidebarCHOFilter';
-import {SidebarFilterComponent} from '../sidebar-filter/sidebar-filter.component';
+import {CHOFilter} from '../../shared/types/cho/CHOFilter';
+import {SidebarComponent} from '../sidebar/sidebar.component';
 import {AtlasService} from './atlas.service';
 import {BackendService} from '../../shared/services/backend.service';
 import {EventsService} from './events.service';
@@ -51,7 +51,7 @@ export class AtlasComponent implements OnInit {
             // GeoJSON: this.layerGeoJSON
         }
     };
-    atlasFilter: SidebarCHOFilter = new SidebarCHOFilter();
+    atlasFilter: CHOFilter = new CHOFilter();
     // private modalPayload: ModalPayload = new ModalPayload(null, {});
     // private modalPayload$: Observable<ModalPayload> = this.markerService.payload$.pipe(takeUntil(this.destroying$));
 
@@ -90,7 +90,7 @@ export class AtlasComponent implements OnInit {
         //     panelClass: 'atlas-filter',
         //     scroll: true
         // } as NgbOffcanvasOptions;
-        const offcanvasRef = this.offcanvasService.open(SidebarFilterComponent);
+        const offcanvasRef = this.offcanvasService.open(SidebarComponent);
         offcanvasRef.componentInstance.filter = this.atlasFilter;
         offcanvasRef.componentInstance.name = 'Atlas Filter';
     }

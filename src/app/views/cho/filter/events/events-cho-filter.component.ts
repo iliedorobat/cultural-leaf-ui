@@ -1,13 +1,13 @@
 import {Component, Input} from '@angular/core';
 import {FormGroup} from '@angular/forms';
 
-import {DATE_RANGES, FilterInterval} from '../SidebarCHOFilter';
+import {DATE_RANGES, FilterInterval} from '../../../../shared/types/cho/CHOFilter';
 
 @Component({
-    selector: 'lmap-sidebar-events-filter',
-    templateUrl: './sidebar-events-filter.component.html'
+    selector: 'lmap-events-cho-filter',
+    templateUrl: './events-cho-filter.component.html'
 })
-export class SidebarEventsFilterComponent {
+export class EventsChoFilterComponent {
     @Input() filterInterval: FilterInterval;
     @Input() form: FormGroup;
 

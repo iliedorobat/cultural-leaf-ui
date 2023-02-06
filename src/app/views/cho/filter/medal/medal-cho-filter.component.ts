@@ -1,14 +1,14 @@
 import {Component, Input} from '@angular/core';
 import {FormGroup} from '@angular/forms';
 
-import {SidebarCHOFilter, MEDAL_FORMS} from '../SidebarCHOFilter';
+import {CHOFilter, MEDAL_FORMS} from '../../../../shared/types/cho/CHOFilter';
 
 @Component({
-    selector: 'lmap-sidebar-medal-filter',
-    templateUrl: './sidebar-medal-filter.component.html'
+    selector: 'lmap-medal-cho-filter',
+    templateUrl: './medal-cho-filter.component.html'
 })
-export class SidebarMedalFilterComponent {
-    @Input() filter: SidebarCHOFilter;
+export class MedalChoFilterComponent {
+    @Input() filter: CHOFilter;
     @Input() form: FormGroup;
 
     MEDAL_FORMS = Object.values(MEDAL_FORMS);

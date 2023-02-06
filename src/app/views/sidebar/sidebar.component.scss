@@ -1,0 +1,14 @@
+$header-padding: 16px;
+
+:host {
+    height: 100%;
+    overflow: hidden;
+
+    > .offcanvas-body {
+        height: calc(100% - (9 * #{$header-padding}));
+    }
+}
+
+//        .button {
+//            background-image: url('~src/assets/icons/keyboard-double-arrow-right.svg');
+//        }

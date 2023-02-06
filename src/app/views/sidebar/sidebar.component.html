@@ -9,65 +9,7 @@
 </div>
 
 <div class="offcanvas-body">
-<!--    was-validated -->
-    <div class="card counter-card" (click)="openCHOsModal()">
-        <div class="card-body">
-            Results: {{ choCounter | number }} CHOs
-        </div>
-    </div>
-
-    <form class="needs-validation" [formGroup]="form" (submit)="onSubmit()">
-        <ngb-accordion activeIds="general-info-filter">
-            <ngb-panel id="general-info-filter" title="Main CHOs Filter">
-                <ng-template ngbPanelContent>
-                    <lmap-sidebar-general-info-filter [filter]="filter" [form]="form"></lmap-sidebar-general-info-filter>
-                </ng-template>
-            </ngb-panel>
-
-            <ngb-panel title="Current Location">
-                <ng-template ngbPanelContent>
-                    <lmap-sidebar-location-filter [filter]="filter" [form]="form"></lmap-sidebar-location-filter>
-                </ng-template>
-            </ngb-panel>
-
-            <ngb-panel title="Creation Period (Interval)">
-                <ng-template ngbPanelContent>
-                    <lmap-sidebar-events-filter [filterInterval]="filter.creationInterval" [form]="form"></lmap-sidebar-events-filter>
-                </ng-template>
-            </ngb-panel>
-
-            <ngb-panel title="Finding Period (Interval)">
-                <ng-template ngbPanelContent>
-                    <lmap-sidebar-events-filter [filterInterval]="filter.foundInterval" [form]="form"></lmap-sidebar-events-filter>
-                </ng-template>
-            </ngb-panel>
-        </ngb-accordion>
-
-        <ngb-accordion activeIds="">
-<!--            <ngb-panel title="Epoch">-->
-<!--                <ng-template ngbPanelContent>-->
-<!--                    <lmap-sidebar-epoch-filter [filter]="filter" [form]="form"></lmap-sidebar-epoch-filter>-->
-<!--                </ng-template>-->
-<!--            </ngb-panel>-->
-
-            <ngb-panel title="Medal Filter">
-                <ng-template ngbPanelContent>
-                    <lmap-sidebar-medal-filter [filter]="filter" [form]="form"></lmap-sidebar-medal-filter>
-                </ng-template>
-            </ngb-panel>
-
-            <ngb-panel title="Natural Science Filter">
-                <ng-template ngbPanelContent>
-                    <lmap-sidebar-natural-science-filter [filter]="filter" [form]="form"></lmap-sidebar-natural-science-filter>
-                </ng-template>
-            </ngb-panel>
-        </ngb-accordion>
-
-        <div class="form-footer">
-            <button class="btn btn-md btn-success" type="submit">Apply Filter</button>
-            <button class="btn btn-md btn-secondary" type="reset" (click)="form.reset()">Reset Filter</button>
-        </div>
-    </form>
+    <lmap-cho-filter [filter]="filter"></lmap-cho-filter>
 </div>
 
 

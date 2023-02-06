@@ -1,14 +1,14 @@
 import {Component, Input} from '@angular/core';
 import {FormGroup} from '@angular/forms';
 
-import {SidebarCHOFilter, RO_EPOCHS} from '../SidebarCHOFilter';
+import {CHOFilter, RO_EPOCHS} from '../../../../shared/types/cho/CHOFilter';
 
 @Component({
-    selector: 'lmap-sidebar-epoch-filter',
-    templateUrl: './sidebar-epoch-filter.component.html'
+    selector: 'lmap-epoch-cho-filter',
+    templateUrl: './epoch-cho-filter.component.html'
 })
-export class SidebarEpochFilterComponent {
-    @Input() filter: SidebarCHOFilter;
+export class EpochChoFilterComponent {
+    @Input() filter: CHOFilter;
     @Input() form: FormGroup;
 
     RO_EPOCHS = Object.values(RO_EPOCHS);

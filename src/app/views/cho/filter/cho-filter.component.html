@@ -1,0 +1,59 @@
+<!--    was-validated -->
+<div class="card counter-card" (click)="openCHOsModal()">
+    <div class="card-body">
+        Results: {{ totalCHOs$ | async | number }} CHOs
+    </div>
+</div>
+
+<form class="needs-validation" [formGroup]="form" (submit)="onSubmit()">
+    <ngb-accordion activeIds="general-info-filter">
+        <ngb-panel id="general-info-filter" title="Main CHOs Filter">
+            <ng-template ngbPanelContent>
+                <lmap-general-info-cho-filter [filter]="filter" [form]="form"></lmap-general-info-cho-filter>
+            </ng-template>
+        </ngb-panel>
+
+        <ngb-panel title="Current Location">
+            <ng-template ngbPanelContent>
+                <lmap-locations-cho-filter [filter]="filter" [form]="form"></lmap-locations-cho-filter>
+            </ng-template>
+        </ngb-panel>
+
+        <ngb-panel title="Creation Period (Interval)">
+            <ng-template ngbPanelContent>
+                <lmap-events-cho-filter [filterInterval]="filter.creationInterval" [form]="form"></lmap-events-cho-filter>
+            </ng-template>
+        </ngb-panel>
+
+        <ngb-panel title="Finding Period (Interval)">
+            <ng-template ngbPanelContent>
+                <lmap-events-cho-filter [filterInterval]="filter.foundInterval" [form]="form"></lmap-events-cho-filter>
+            </ng-template>
+        </ngb-panel>
+    </ngb-accordion>
+
+    <ngb-accordion activeIds="">
+        <!--            <ngb-panel title="Epoch">-->
+        <!--                <ng-template ngbPanelContent>-->
+        <!--                    <lmap-epoch-cho-filter [filter]="filter" [form]="form"></lmap-epoch-cho-filter>-->
+        <!--                </ng-template>-->
+        <!--            </ngb-panel>-->
+
+        <ngb-panel title="Medal Filter">
+            <ng-template ngbPanelContent>
+                <lmap-medal-cho-filter [filter]="filter" [form]="form"></lmap-medal-cho-filter>
+            </ng-template>
+        </ngb-panel>
+
+        <ngb-panel title="Natural Science Filter">
+            <ng-template ngbPanelContent>
+                <lmap-natural-science-cho-filter [filter]="filter" [form]="form"></lmap-natural-science-cho-filter>
+            </ng-template>
+        </ngb-panel>
+    </ngb-accordion>
+
+    <div class="form-footer">
+        <button class="btn btn-md btn-success" type="submit">Apply Filter</button>
+        <button class="btn btn-md btn-secondary" type="reset" (click)="form.reset()">Reset Filter</button>
+    </div>
+</form>
