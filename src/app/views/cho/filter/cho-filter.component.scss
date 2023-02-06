@@ -1,45 +1,48 @@
-//@import 'src/assets/styles/variables';
-
-$header-padding: 16px;
-$header-height: 30px;
-$header-height-with-padding: 30px + (2 * $header-padding);
+@import 'src/assets/styles/variables';
+//@import 'node_modules/bootstrap/scss/bootstrap.scss';
 
 :host {
+    width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
 
-    .counter-card {
-        cursor: pointer;
-        // TODO:
-        background: rgba(188, 143, 143, 0.4);
+    > .cho-filter {
+        .btn-counter {
+            width: 100%;
+            text-align: justify;
+            border: 1px solid rgba(0, 0, 0, 0.175);
 
-        &:hover {
             // TODO:
-            background: rgba(180, 160, 150, 0.4);
-            box-shadow: 0 0 0 2px rgba(180, 160, 150, 0.4);
-        }
-    }
+            background: rgba(188, 143, 143, 0.4);
 
-    > form {
-        ::ng-deep {
-            .accordion-item {
-                &:first-of-type {
-                    margin-top: $header-padding;
-                }
+            &:hover {
+                // TODO:
+                background: rgba(180, 160, 150, 0.4);
+                box-shadow: 0 0 0 2px rgba(180, 160, 150, 0.4);
             }
         }
 
-        > .form-footer {
-            position: absolute;
-            top: calc(100% - (4 * #{$header-padding}));
-            width: calc(100% - (3 * #{$header-padding}));
-            display: flex;
-            gap: 16px;
+        > form {
+            ::ng-deep {
+                .accordion-item {
+                    &:first-of-type {
+                        margin-top: $cho-filter-padding;
+                    }
+                }
+            }
 
-            > button[type='submit'],
-            > button[type='reset'] {
-                width: 50%;
+            > .form-footer {
+                position: absolute;
+                top: calc(100% - (4 * #{$cho-filter-padding}));
+                width: calc(100% - (3 * #{$cho-filter-padding}));
+                display: flex;
+                gap: 16px;
+
+                > button[type='submit'],
+                > button[type='reset'] {
+                    width: 50%;
+                }
             }
         }
     }

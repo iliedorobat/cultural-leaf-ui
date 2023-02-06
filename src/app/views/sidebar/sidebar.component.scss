@@ -1,14 +1,17 @@
-$header-padding: 16px;
+@import 'src/assets/styles/variables';
 
 :host {
-    height: 100%;
     overflow: hidden;
+    min-width: var(--bs-offcanvas-width);
+    height: calc(100% - ($cho-filter-header-box + (2 * $cho-filter-padding)));
 
     > .offcanvas-body {
-        height: calc(100% - (9 * #{$header-padding}));
+        height: calc(100% - #{$cho-filter-header-box});
+        width: calc(100% - 1px);
     }
 }
 
-//        .button {
-//            background-image: url('~src/assets/icons/keyboard-double-arrow-right.svg');
-//        }
+// TODO:
+// .button {
+//     background-image: url('~src/assets/icons/keyboard-double-arrow-right.svg');
+// }

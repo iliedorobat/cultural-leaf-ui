@@ -3,7 +3,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {BrowserModule} from '@angular/platform-browser';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {LeafletModule} from '@asymmetrik/ngx-leaflet';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgbActiveOffcanvas, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 
@@ -96,6 +96,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         DecimalPipe,
         HttpService,
         MarkerModalService,
+        NgbActiveOffcanvas,
         StrService
     ],
     bootstrap: [AppComponent]

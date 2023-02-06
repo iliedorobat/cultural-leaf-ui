@@ -1,13 +1,36 @@
+@import 'src/assets/styles/variables';
+
 :host {
     display: flex;
     height: 100%;
     flex-direction: column;
 
-    .table-wrapper {
-        padding: 0 32px;
+    > .modal-body {
+        > .sidebar {
+            position: relative;
+            // The size calculated inside of the Sidebar
+            min-width: calc(#{$offcanvas-width} - 34px);
+            height: 100%;
 
-        > .pagination-section {
-            margin-bottom: 1rem;
+            > .filter-wrapper {
+                height: calc(100% - ($cho-filter-header-box + (2 * $cho-filter-padding)));
+                overflow-x: hidden;
+                overflow-y: auto;
+
+                ::ng-deep {
+                    .form-footer {
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    
+        > .content {
+            width: 100%;
+
+            > .pagination-section {
+                margin-bottom: 1rem;
+            }
         }
     }
 }

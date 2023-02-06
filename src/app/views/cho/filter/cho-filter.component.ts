@@ -13,7 +13,8 @@ import {
 } from '@angular/forms';
 import {CHOSummaryScreenComponent} from '../summary-screen/cho-summary-screen.component';
 import {BackendService} from '../../../shared/services/backend.service';
-import {CHOFilter} from '../../../shared/types/cho/CHOFilter';
+import {CHO_DISPLAY_STATES, CHO_TYPES, CHOFilter} from '../../../shared/types/cho/CHOFilter';
+import {TableService} from '../../../shared/components/table/table.service';
 
 @Component({
     selector: 'lmap-cho-filter',
@@ -22,17 +23,30 @@ import {CHOFilter} from '../../../shared/types/cho/CHOFilter';
 })
 export class CHOFilterComponent implements OnInit {
     totalCHOs$: Observable<number>;
+    counterClickable = true;
 
     constructor(
         public activeOffcanvas: NgbActiveOffcanvas,
         private backendService: BackendService,
         private formBuilder: FormBuilder,
-        private modalService: NgbModal
+        private modalService: NgbModal,
+        public tableService: TableService
     ) {
         this.totalCHOs$ = backendService.totalCHOs$;
+
+        this.modalService.activeInstances
+            .subscribe(openedModals => {
+                for (const modalInstance of openedModals) {
+                    if (modalInstance.componentInstance instanceof CHOSummaryScreenComponent) {
+                        this.counterClickable = false;
+                        break;
+                    }
+                }
+            });
     }
 
     @Input() filter: CHOFilter;
+    @Input() onFilterApply: Function;
 
     form: FormGroup;
 
@@ -86,14 +100,28 @@ export class CHOFilterComponent implements OnInit {
     // TODO: form control validation: https://github.com/loiane/angular-reactive-forms-validate-submit/blob/97a7e9ebd834b0913c15a0fc27fe19b2ffe9a05d/src/app/validate-fields-submit-form/validate-fields-submit-form.component.ts#L54
     onSubmit() {
         // this.filter.prepareBackendData();
+        const filter = new CHOFilter();
+        filter.displayState = CHO_DISPLAY_STATES.MEDIOCRE;
+        filter.type = CHO_TYPES.BIOLOGICAL_OBJECT;
 
         this.backendService.museumsSubscription(this.filter);
         this.backendService.choCounterSubscription(this.filter);
+
+        this.onFilterApply && this.onFilterApply();
     }
 
     openCHOsModal = () => {
+        if (!this.counterClickable) {
+            return;
+        }
+
         const modalRef = this.modalService.open(CHOSummaryScreenComponent, {fullscreen: true});
         modalRef.componentInstance.filter = this.filter;
         this.activeOffcanvas.close();
+
+        this.backendService.chosSummaries$
+            .subscribe(summaries => {
+                this.tableService.rawData = summaries;
+            });
     }
 }

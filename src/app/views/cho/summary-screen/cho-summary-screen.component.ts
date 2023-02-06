@@ -31,13 +31,17 @@ export class CHOSummaryScreenComponent implements OnInit {
         this.backendService.chosSummaries$
             .subscribe(summaries => {
                 this.tableService.rawData = summaries;
-            })
+            });
     }
 
     @ViewChildren(SortableHeader) headers: QueryList<SortableHeader>;
     @Input() filter: CHOFilter;
 
     ngOnInit(): void {
+        this.onFilterApply();
+    }
+
+    onFilterApply = () => {
         this.tableService.page = 1;
         this.backendService.chosSubscription(this.filter);
     }
