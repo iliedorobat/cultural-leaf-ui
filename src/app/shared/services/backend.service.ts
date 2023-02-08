@@ -2,7 +2,7 @@ import {BehaviorSubject, map, Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 
-import {Museum} from '../types/museum/Museum';
+import {MuseumDetails} from '../types/museum/MuseumDetails';
 import {MuseumSummary} from '../types/museum/MuseumSummary';
 import {CHO_ENDPOINT, HTTP_OPTIONS, MUSEUM_ENDPOINT} from './backend.const';
 import {CHOFilter} from '../types/cho/CHOFilter';
@@ -38,8 +38,8 @@ export class BackendService {
         return this.http.post<CHOSummary[]>(CHO_ENDPOINT, payload, HTTP_OPTIONS);
     }
 
-    public getMuseumDetails(uri: string): Observable<Museum> {
-        return this.http.get<Museum>(`${MUSEUM_ENDPOINT}?uri=${uri}`, HTTP_OPTIONS);
+    public getMuseumDetails(uri: string): Observable<MuseumDetails> {
+        return this.http.get<MuseumDetails>(`${MUSEUM_ENDPOINT}?uri=${uri}`, HTTP_OPTIONS);
     }
 
     public getMuseumsSummaries(payload: CHOFilter): Observable<MuseumSummary[]> {

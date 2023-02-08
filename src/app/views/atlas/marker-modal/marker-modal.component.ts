@@ -3,7 +3,7 @@ import {NgbActiveModal, NgbModal, NgbModalConfig} from '@ng-bootstrap/ng-bootstr
 import {TranslateService} from '@ngx-translate/core';
 
 import {HttpService} from '../../../shared/services/http.service';
-import {Museum} from '../../../shared/types/museum/Museum';
+import {MuseumDetails} from '../../../shared/types/museum/MuseumDetails';
 import {SECTIONS_ORDER} from './maker-modal.const';
 
 @Component({
@@ -21,7 +21,7 @@ export class MarkerModalComponent implements OnInit {
     ) {}
 
     @Input() title: string;
-    @Input() payload: Museum;
+    @Input() payload: MuseumDetails;
     SECTIONS: Array<string> = [];
 
     ngOnInit(): void {

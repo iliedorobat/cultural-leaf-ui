@@ -7,7 +7,7 @@ import {BackendService} from '../../../shared/services/backend.service';
 import {MarkerModalComponent} from './marker-modal.component';
 
 import {ModalPayload} from '../../../shared/types/ModalPayload';
-import {Museum} from '../../../shared/types/museum/Museum';
+import {MuseumDetails} from '../../../shared/types/museum/MuseumDetails';
 import {MuseumSummary} from '../../../shared/types/museum/MuseumSummary';
 
 @Injectable({
@@ -34,7 +34,7 @@ export class MarkerModalService {
 
         if (title || !_.isEmpty(entitySummary)) {
             this.backendService.getMuseumDetails(entitySummary.uri)
-                .subscribe((museumPayload: Museum) => {
+                .subscribe((museumPayload: MuseumDetails) => {
                     const modalRef = this.modalService.open(MarkerModalComponent, {scrollable: true});
                     modalRef.componentInstance.title = title;
                     modalRef.componentInstance.payload = museumPayload;
