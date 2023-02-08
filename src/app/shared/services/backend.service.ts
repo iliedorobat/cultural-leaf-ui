@@ -8,6 +8,7 @@ import {CHO_ENDPOINT, HTTP_OPTIONS, MUSEUM_ENDPOINT} from './backend.const';
 import {CHOFilter} from '../types/cho/CHOFilter';
 import {CHOSummary} from '../types/cho/CHOSummary';
 import {Counter} from '../types/Counter';
+import {CHODetails} from '../types/cho/CHODetails';
 
 @Injectable({
     providedIn: 'root'
@@ -21,17 +22,15 @@ export class BackendService {
     public museumsSummaries$: BehaviorSubject<MuseumSummary[]> = new BehaviorSubject<MuseumSummary[]>([]);
     // private _museumDetails$: BehaviorSubject<Museum> = new BehaviorSubject<Museum>({} as Museum);
     private _choCount$: BehaviorSubject<Counter> = new BehaviorSubject<Counter>({count: 0} as Counter);
-    // TODO: any?
-    private _choDetails$: BehaviorSubject<any> = new BehaviorSubject<any>({});
+    private _choDetails$: BehaviorSubject<CHODetails> = new BehaviorSubject<CHODetails>({} as CHODetails);
     private _chosSummaries$: BehaviorSubject<CHOSummary[]> = new BehaviorSubject<CHOSummary[]>([]);
 
-    public retrieveChoCounter(payload: CHOFilter | any) {
-        return this.http.post(CHO_ENDPOINT + "?aggr=count", payload, HTTP_OPTIONS);
+    public retrieveChoCounter(payload: CHOFilter | null): Observable<Counter> {
+        return this.http.post<Counter>(CHO_ENDPOINT + "?aggr=count", payload, HTTP_OPTIONS);
     }
 
-    // TODO: Observable<any>?
-    public getCHODetails(uri: string): Observable<any> {
-        return this.http.get(`${CHO_ENDPOINT}?uri=${uri}`, HTTP_OPTIONS);
+    public getCHODetails(uri: string): Observable<CHODetails> {
+        return this.http.get<CHODetails>(`${CHO_ENDPOINT}?uri=${uri}`, HTTP_OPTIONS);
     }
 
     public getCHOsSummaries(payload: CHOFilter): Observable<CHOSummary[]> {
@@ -46,7 +45,7 @@ export class BackendService {
         return this.http.post<MuseumSummary[]>(MUSEUM_ENDPOINT, payload, HTTP_OPTIONS);
     }
 
-    public choCounterSubscription(payload: CHOFilter | any) {
+    public choCounterSubscription(payload: CHOFilter | null) {
         this.retrieveChoCounter(payload)
             .subscribe((data: any) => {
                 this._choCount$.next(data);
@@ -69,7 +68,7 @@ export class BackendService {
 
     public choDetilsSubscription(uri: string) {
         this.getCHODetails(uri)
-            .subscribe((data: any[]) => {
+            .subscribe((data: CHODetails) => {
                 this._choDetails$.next(data);
             });
     }
