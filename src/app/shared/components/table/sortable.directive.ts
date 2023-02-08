@@ -1,4 +1,4 @@
-import {Directive, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Directive, EventEmitter, Input, Output} from '@angular/core';
 
 import {CHOSummary} from '../../types/cho/CHOSummary';
 
@@ -27,7 +27,7 @@ export interface SortEvent {
         '(click)': 'rotate()',
     }
 })
-export class SortableHeader implements OnInit {
+export class SortableHeader {
     @Input() sortable: SortColumn = '';
     @Input() direction: SortDirection = '';
     @Output() sort = new EventEmitter<SortEvent>();
@@ -38,9 +38,5 @@ export class SortableHeader implements OnInit {
             column: this.sortable,
             direction: this.direction
         });
-    }
-
-    ngOnInit(): void {
-        console.log('directive:', this);
     }
 }

@@ -9,26 +9,23 @@ import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 
 import {AtlasService} from './views/atlas/atlas.service';
 import {HttpService} from './shared/services/http.service';
-import {MarkerModalService} from './views/atlas/marker-modal/marker-modal.service';
 import {StrService} from './shared/services/str.service';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {AtlasComponent} from './views/atlas/atlas.component';
-import {CHODetailsScreenComponent} from './views/cho/details-screen/cho-details-screen.component';
 import {CHOFilterComponent} from './views/cho/filter/cho-filter.component';
 import {CHOSummaryScreenComponent} from './views/cho/summary-screen/cho-summary-screen.component';
 import {DecimalPipe} from '@angular/common';
+import {DetailsScreenComponent} from './shared/models/details/details-screen.component';
+import {
+    DetailsScreenSectionPipe,
+    DetailsScreenSectionSubtitlePipe,
+    DetailsScreenSectionTitlePipe,
+    DetailsScreenSectionValuePipe
+} from './shared/models/details/maker-modal.pipe';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HorizontalLineComponent} from './shared/components/horizontal-line/horizontal-line';
-import {MarkerModalComponent} from './views/atlas/marker-modal/marker-modal.component';
-import {
-    MarkerModalMuseumPayloadPipe,
-    MarkerModalSectionPipe,
-    MarkerModalSectionSubtitlePipe,
-    MarkerModalSectionTitlePipe,
-    MarkerModalSectionValuePipe
-} from './views/atlas/marker-modal/maker-modal.pipe';
 import {SectionPaneComponent} from './shared/components/panes/section-pane/section-pane.component';
 import {SidebarComponent} from './views/sidebar/sidebar.component';
 import {EventsChoFilterComponent} from './views/cho/filter/events/events-cho-filter.component';
@@ -48,16 +45,14 @@ export function HttpLoaderFactory(http: HttpClient) {
     declarations: [
         AppComponent,
         AtlasComponent,
-        CHODetailsScreenComponent,
         CHOFilterComponent,
         CHOSummaryScreenComponent,
+        DetailsScreenComponent,
+        DetailsScreenSectionPipe,
+        DetailsScreenSectionSubtitlePipe,
+        DetailsScreenSectionTitlePipe,
+        DetailsScreenSectionValuePipe,
         HorizontalLineComponent,
-        MarkerModalComponent,
-        MarkerModalMuseumPayloadPipe,
-        MarkerModalSectionPipe,
-        MarkerModalSectionSubtitlePipe,
-        MarkerModalSectionTitlePipe,
-        MarkerModalSectionValuePipe,
         SectionPaneComponent,
         SidebarComponent,
         EventsChoFilterComponent,
@@ -69,10 +64,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     ],
     entryComponents: [
         CHOSummaryScreenComponent,
-        MarkerModalComponent
+        DetailsScreenComponent
     ],
     // exports: [
-    //   MarkerModalComponent
+    //   DetailsScreenComponent
     // ],
     imports: [
         HttpClientModule,
@@ -97,7 +92,6 @@ export function HttpLoaderFactory(http: HttpClient) {
         AtlasService,
         DecimalPipe,
         HttpService,
-        MarkerModalService,
         NgbActiveOffcanvas,
         StrService
     ],

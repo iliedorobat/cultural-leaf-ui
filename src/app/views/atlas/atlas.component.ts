@@ -10,8 +10,6 @@ import {AtlasService} from './atlas.service';
 import {BackendService} from '../../shared/services/backend.service';
 import {EventsService} from './events.service';
 import {LayersService} from './layers.service';
-import {MarkerModalService} from './marker-modal/marker-modal.service';
-import {ModalPayload} from '../../shared/types/ModalPayload';
 import {MuseumSummary} from '../../shared/types/museum/MuseumSummary';
 
 import {COUNTIES} from 'src/app/shared/constants/geo.const';
@@ -32,7 +30,6 @@ export class AtlasComponent implements OnInit {
         private changeDetector: ChangeDetectorRef,
         private eventsService: EventsService,
         private layersService: LayersService,
-        private markerService: MarkerModalService,
         private offcanvasService: NgbOffcanvas
     ) {}
 
@@ -53,7 +50,7 @@ export class AtlasComponent implements OnInit {
     };
     atlasFilter: CHOFilter = new CHOFilter();
     // private modalPayload: ModalPayload = new ModalPayload(null, {});
-    // private modalPayload$: Observable<ModalPayload> = this.markerService.payload$.pipe(takeUntil(this.destroying$));
+    // private modalPayload$: Observable<ModalPayload> = this.eventsService.payload$.pipe(takeUntil(this.destroying$));
 
     ngOnInit(): void {
         // this.modalPayload$

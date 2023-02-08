@@ -1,6 +1,8 @@
 import {Geolocation} from 'src/app/shared/types/geolocation/Geolocation';
 
 export interface MuseumSummary {
+    [index: string]: any;
+
     county: string;
     countyUri: string;
     geolocation: Geolocation;

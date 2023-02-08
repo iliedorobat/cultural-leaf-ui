@@ -1,17 +1,21 @@
-import {Injectable, Injector} from '@angular/core';
+import {Injectable, Injector, NgZone} from '@angular/core';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {GeoJSON, LatLng, Map, Marker, PointTuple, PopupOptions} from 'leaflet';
+import {BehaviorSubject, Observable} from 'rxjs';
 import * as _ from 'lodash';
 
 import {AtlasService, MARKERS_STATUS} from './atlas.service';
 import {BackendService} from '../../shared/services/backend.service';
+import {DetailsScreenComponent} from '../../shared/models/details/details-screen.component';
+import {GeoLand} from 'src/app/shared/types/geolocation/GeoLand';
 import {HtmlService} from 'src/app/shared/services/html.service';
+import {MuseumDetails} from '../../shared/types/museum/MuseumDetails';
+import {MuseumSummary} from '../../shared/types/museum/MuseumSummary';
 import {PopupService} from './popup.service';
 import {StrService} from 'src/app/shared/services/str.service';
 
-import {GeoLand} from 'src/app/shared/types/geolocation/GeoLand';
-import {MarkerModalService} from './marker-modal/marker-modal.service';
-import {MuseumSummary} from '../../shared/types/museum/MuseumSummary';
 import {ENTITY_TYPE} from '../../shared/constants/entity.enum';
+import {MUSEUM_SECTIONS_ORDER} from '../../shared/models/details/details-screen.const';
 
 @Injectable({
     providedIn: 'root'
@@ -22,8 +26,9 @@ export class EventsService {
         private backendService: BackendService,
         private htmlService: HtmlService,
         private injector: Injector,
-        private modalService: MarkerModalService,
-        private strService: StrService
+        private modalService: NgbModal,
+        private strService: StrService,
+        private zone: NgZone
     ) {}
 
     public addLayerEvents = (map: Map, layer: GeoJSON, geoLand: GeoLand, entitiesSummaries: MuseumSummary[]) => {
@@ -112,7 +117,7 @@ export class EventsService {
 
     private onMarkerClick = (marker: Marker, title: string, payload: MuseumSummary) => {
         marker.addEventListener(EVENTS_TYPE.CLICK, () => {
-            this.modalService.openSummary(title, payload);
+            this.openSummary(title, payload);
         });
     };
 
@@ -120,7 +125,7 @@ export class EventsService {
         const moreInfo = this.htmlService.createAnchor('More Info', 'more-info-link');
 
         moreInfo.addEventListener(EVENTS_TYPE.CLICK, () => {
-            this.modalService.openSummary(title, entitySummary);
+            this.openSummary(title, entitySummary);
         });
 
         return moreInfo;
@@ -142,6 +147,33 @@ export class EventsService {
         // TODO: add more conditions as you need
         return;
     }
+
+    private openSummary = (title: string | null, summary: MuseumSummary): void => {
+        if (title || !_.isEmpty(summary)) {
+            this.backendService.getMuseumDetails(summary.uri)
+                .subscribe((museumPayload: MuseumDetails) => {
+                    const modalRef = this.modalService.open(DetailsScreenComponent, {scrollable: true});
+                    modalRef.componentInstance.entityType = museumPayload.mainInfo.entityType;
+                    modalRef.componentInstance.i18nPrefix = 'markerModal';
+                    modalRef.componentInstance.sections = MUSEUM_SECTIONS_ORDER;
+                    modalRef.componentInstance.title = title;
+                    modalRef.componentInstance.payload = museumPayload;
+                });
+        }
+    };
+
+    // private subject = new BehaviorSubject<ModalPayload>(this.payload);
+    // public payload$: Observable<ModalPayload> = this.subject.asObservable();
+
+    // private openModal = () => {
+    //     this.zone.run(() => {
+    //         this.dialog.open(DetailsScreenComponent, {
+    //             data: this.payload,
+    //             width: '30%',
+    //             maxHeight: '80%'
+    //         });
+    //     });
+    // };
 }
 
 export const EVENTS_TYPE = {

@@ -2,6 +2,7 @@ import {Geolocation} from 'src/app/shared/types/geolocation/Geolocation';
 
 export interface MuseumDetails extends Object {
     [index: string]: any;
+
     building?: Building;
     collection?: Collection;
     contact?: Contact;

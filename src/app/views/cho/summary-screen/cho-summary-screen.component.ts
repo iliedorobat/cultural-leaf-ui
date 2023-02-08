@@ -3,10 +3,16 @@ import {NgbActiveModal, NgbModal, NgbModalConfig} from '@ng-bootstrap/ng-bootstr
 import {TranslateService} from '@ngx-translate/core';
 import {Observable} from 'rxjs';
 
-import {CHOFilter} from '../../../shared/types/cho/CHOFilter';
 import {BackendService} from '../../../shared/services/backend.service';
+import {CHODetails} from '../../../shared/types/cho/CHODetails';
+import {CHOFilter} from '../../../shared/types/cho/CHOFilter';
+import {CHOSummary} from '../../../shared/types/cho/CHOSummary';
+import {DetailsScreenComponent} from '../../../shared/models/details/details-screen.component';
 import {SortableHeader, SortEvent} from '../../../shared/components/table/sortable.directive';
 import {TableService} from '../../../shared/components/table/table.service';
+
+import {CHO_SECTIONS_ORDER} from '../../../shared/models/details/details-screen.const';
+import {ENTITY_TYPE} from '../../../shared/constants/entity.enum';
 
 @Component({
     selector: 'lmap-cho-summary-screen',
@@ -22,6 +28,7 @@ export class CHOSummaryScreenComponent implements OnInit {
     constructor(
         public activeModal: NgbActiveModal,
         private backendService: BackendService,
+        private modalService: NgbModal,
         public tableService: TableService,
         private translate: TranslateService
     ) {
@@ -44,6 +51,18 @@ export class CHOSummaryScreenComponent implements OnInit {
     onFilterApply = () => {
         this.tableService.page = 1;
         this.backendService.chosSummariesSubscription(this.filter);
+    }
+
+    onRowClick(summary: CHOSummary) {
+        this.backendService.getCHODetails(summary.uri)
+            .subscribe((choPayload: CHODetails) => {
+                const modalRef = this.modalService.open(DetailsScreenComponent, {scrollable: true});
+                modalRef.componentInstance.entityType = ENTITY_TYPE.CHO;
+                modalRef.componentInstance.i18nPrefix = 'choDetailsModal';
+                modalRef.componentInstance.sections = CHO_SECTIONS_ORDER;
+                modalRef.componentInstance.title = summary.title;
+                modalRef.componentInstance.payload = choPayload;
+            });
     }
 
     onSort({column, direction}: SortEvent) {

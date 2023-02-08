@@ -43,9 +43,6 @@ export class CHOFilterComponent implements OnInit {
                     }
                 }
             });
-
-        // TODO: remove
-        this.backendService.choDetilsSubscription('http://opendata.cs.pub.ro/resource/CHO/CIMEC/6066DEF2041945B988FA7C17FCAC1C2A');
     }
 
     @Input() filter: CHOFilter;

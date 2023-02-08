@@ -2,6 +2,7 @@
 
 export interface CHODetails extends Object {
     [index: string]: any;
+
     details: Details;
     features: Features;
     mainInfo: MainInfo;

@@ -1,4 +1,5 @@
 enum ENTITY_TYPE {
+    CHO = 'CHO',
     MUSEUM = 'Museum'
 }
 
