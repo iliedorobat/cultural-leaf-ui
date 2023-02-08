@@ -15,11 +15,12 @@ import {CHODetails} from '../types/cho/CHODetails';
 })
 export class BackendService {
     constructor(private http: HttpClient) {
-        this.museumsSummariesSubscription(null);
+        // this.museumsSummariesSubscription(); // get the list of all museums
+        this.museumsSummariesSubscription(new CHOFilter()); // get the list of museums which hosts CHOs
         this.choCounterSubscription(null);
     }
 
-    public museumsSummaries$: BehaviorSubject<MuseumSummary[]> = new BehaviorSubject<MuseumSummary[]>([]);
+    public _museumsSummaries$: BehaviorSubject<MuseumSummary[]> = new BehaviorSubject<MuseumSummary[]>([]);
     // private _museumDetails$: BehaviorSubject<Museum> = new BehaviorSubject<Museum>({} as Museum);
     private _choCount$: BehaviorSubject<Counter> = new BehaviorSubject<Counter>({count: 0} as Counter);
     private _choDetails$: BehaviorSubject<CHODetails> = new BehaviorSubject<CHODetails>({} as CHODetails);
@@ -62,7 +63,7 @@ export class BackendService {
     public museumsSummariesSubscription(payload: CHOFilter | any) {
         this.getMuseumsSummaries(payload)
             .subscribe((data: MuseumSummary[]) => {
-                this.museumsSummaries$.next(data);
+                this._museumsSummaries$.next(data);
             });
     }
 
@@ -88,5 +89,9 @@ export class BackendService {
 
     get chosSummaries$() {
         return this._chosSummaries$.asObservable();
+    }
+
+    get museumsSummaries$() {
+        return this._museumsSummaries$.asObservable();
     }
 }
