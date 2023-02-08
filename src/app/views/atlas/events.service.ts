@@ -6,7 +6,7 @@ import * as _ from 'lodash';
 
 import {AtlasService, MARKERS_STATUS} from './atlas.service';
 import {BackendService} from '../../shared/services/backend.service';
-import {DetailsScreenComponent} from '../../shared/models/details/details-screen.component';
+import {DetailsScreenComponent} from '../../shared/models/details-screen/details-screen.component';
 import {GeoLand} from 'src/app/shared/types/geolocation/GeoLand';
 import {HtmlService} from 'src/app/shared/services/html.service';
 import {MuseumDetails} from '../../shared/types/museum/MuseumDetails';
@@ -15,7 +15,7 @@ import {PopupService} from './popup.service';
 import {StrService} from 'src/app/shared/services/str.service';
 
 import {ENTITY_TYPE} from '../../shared/constants/entity.enum';
-import {MUSEUM_SECTIONS_ORDER} from '../../shared/models/details/details-screen.const';
+import {MUSEUM_SECTIONS_ORDER} from '../../shared/models/details-screen/details-screen.const';
 
 @Injectable({
     providedIn: 'root'
