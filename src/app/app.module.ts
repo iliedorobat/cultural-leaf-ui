@@ -23,7 +23,7 @@ import {
     DetailsScreenSectionSubtitlePipe,
     DetailsScreenSectionTitlePipe,
     DetailsScreenSectionValuePipe
-} from './shared/models/details/maker-modal.pipe';
+} from './shared/models/details/details-screen.pipe';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HorizontalLineComponent} from './shared/components/horizontal-line/horizontal-line';
 import {SectionPaneComponent} from './shared/components/panes/section-pane/section-pane.component';
