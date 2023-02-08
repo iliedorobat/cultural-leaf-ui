@@ -78,7 +78,15 @@ const prepareDefaultSectionPayload = (details: object): object => Object.entries
 
 const prepareCHOSectionPayload = (choDetails: CHODetails): object => Object.entries(choDetails)
     .reduce((acc: any, [key, value]: any) => {
-        acc[key] = value;
+        if (Array.isArray(value)) {
+            acc[key] = value.map(item => {
+                return item.lang
+                    ? item.value + '<b>@' + item.lang + '</b>'
+                    : item.value;
+            });
+        } else {
+            acc[key] = value;
+        }
 
         return acc;
     }, {});
