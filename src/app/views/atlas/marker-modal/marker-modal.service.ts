@@ -33,7 +33,7 @@ export class MarkerModalService {
         // this.subject.next(this.payload);
 
         if (title || !_.isEmpty(entitySummary)) {
-            this.backendService.getMuseum(entitySummary.uri)
+            this.backendService.getMuseumDetails(entitySummary.uri)
                 .subscribe((museumPayload: Museum) => {
                     const modalRef = this.modalService.open(MarkerModalComponent, {scrollable: true});
                     modalRef.componentInstance.title = title;

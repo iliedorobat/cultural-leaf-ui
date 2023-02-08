@@ -1,8 +1,10 @@
+// TODO: add edm:hasType
 export interface CHOSummary {
-    category: string; // TODO: edm:hasType?
-    description: string;
-    inventoryNumber: string;
-    location: string; // TODO:
-    title: string;
-    uri: string;
+    category: string;           // dc:type
+    inventoryNumber: string;    // odp:inventoryNumber
+    location: string;           // edm:currentLocation // TODO:
+    summary: string;            // odp:overallDescription
+    title: string;              // dc:title
+
+    uri: string;                // edm:aggregatedCHO
 }

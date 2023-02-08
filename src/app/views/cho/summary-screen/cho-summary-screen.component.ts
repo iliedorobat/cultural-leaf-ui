@@ -43,7 +43,7 @@ export class CHOSummaryScreenComponent implements OnInit {
 
     onFilterApply = () => {
         this.tableService.page = 1;
-        this.backendService.chosSubscription(this.filter);
+        this.backendService.chosSummariesSubscription(this.filter);
     }
 
     onSort({column, direction}: SortEvent) {

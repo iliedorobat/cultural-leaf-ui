@@ -14,32 +14,36 @@ import {Counter} from '../types/Counter';
 })
 export class BackendService {
     constructor(private http: HttpClient) {
-        this.museumsSubscription(null);
+        this.museumsSummariesSubscription(null);
         this.choCounterSubscription(null);
     }
 
     public museumsSummaries$: BehaviorSubject<MuseumSummary[]> = new BehaviorSubject<MuseumSummary[]>([]);
+    // private _museumDetails$: BehaviorSubject<Museum> = new BehaviorSubject<Museum>({} as Museum);
     private _choCount$: BehaviorSubject<Counter> = new BehaviorSubject<Counter>({count: 0} as Counter);
+    // TODO: any?
+    private _choDetails$: BehaviorSubject<any> = new BehaviorSubject<any>({});
     private _chosSummaries$: BehaviorSubject<CHOSummary[]> = new BehaviorSubject<CHOSummary[]>([]);
 
     public retrieveChoCounter(payload: CHOFilter | any) {
         return this.http.post(CHO_ENDPOINT + "?aggr=count", payload, HTTP_OPTIONS);
     }
 
-    public getCHOSummaries(payload: CHOFilter): Observable<any[]> {
+    // TODO: Observable<any>?
+    public getCHODetails(uri: string): Observable<any> {
+        return this.http.get(`${CHO_ENDPOINT}?uri=${uri}`, HTTP_OPTIONS);
+    }
+
+    public getCHOsSummaries(payload: CHOFilter): Observable<CHOSummary[]> {
         return this.http.post<CHOSummary[]>(CHO_ENDPOINT, payload, HTTP_OPTIONS);
     }
 
-    public getMuseum(uri: string): Observable<Museum> {
-        return this.http.post<Museum>(`${MUSEUM_ENDPOINT}?uri=${uri}`, null, HTTP_OPTIONS);
+    public getMuseumDetails(uri: string): Observable<Museum> {
+        return this.http.get<Museum>(`${MUSEUM_ENDPOINT}?uri=${uri}`, HTTP_OPTIONS);
     }
 
-    public getMuseums(payload: CHOFilter): Observable<MuseumSummary[]> {
+    public getMuseumsSummaries(payload: CHOFilter): Observable<MuseumSummary[]> {
         return this.http.post<MuseumSummary[]>(MUSEUM_ENDPOINT, payload, HTTP_OPTIONS);
-    }
-
-    private fetchMuseum(uri: string) {
-        //
     }
 
     public choCounterSubscription(payload: CHOFilter | any) {
@@ -49,15 +53,29 @@ export class BackendService {
             });
     }
 
-    public museumsSubscription(payload: CHOFilter | any) {
-        this.getMuseums(payload)
+    // public museumDetailsSubscription(uri: string) {
+    //     this.getMuseumDetails(uri)
+    //         .subscribe((data: Museum) => {
+    //             this._museumDetails$.next(data);
+    //         });
+    // }
+
+    public museumsSummariesSubscription(payload: CHOFilter | any) {
+        this.getMuseumsSummaries(payload)
             .subscribe((data: MuseumSummary[]) => {
                 this.museumsSummaries$.next(data);
             });
     }
 
-    public chosSubscription(payload: CHOFilter | any) {
-        this.getCHOSummaries(payload)
+    public choDetilsSubscription(uri: string) {
+        this.getCHODetails(uri)
+            .subscribe((data: any[]) => {
+                this._choDetails$.next(data);
+            });
+    }
+
+    public chosSummariesSubscription(payload: CHOFilter | any) {
+        this.getCHOsSummaries(payload)
             .subscribe((data: CHOSummary[]) => {
                 this._chosSummaries$.next(data);
             });

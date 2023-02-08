@@ -15,6 +15,7 @@ import {StrService} from './shared/services/str.service';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {AtlasComponent} from './views/atlas/atlas.component';
+import {CHODetailsScreenComponent} from './views/cho/details-screen/cho-details-screen.component';
 import {CHOFilterComponent} from './views/cho/filter/cho-filter.component';
 import {CHOSummaryScreenComponent} from './views/cho/summary-screen/cho-summary-screen.component';
 import {DecimalPipe} from '@angular/common';
@@ -47,6 +48,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     declarations: [
         AppComponent,
         AtlasComponent,
+        CHODetailsScreenComponent,
         CHOFilterComponent,
         CHOSummaryScreenComponent,
         HorizontalLineComponent,

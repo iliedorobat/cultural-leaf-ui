@@ -43,6 +43,9 @@ export class CHOFilterComponent implements OnInit {
                     }
                 }
             });
+
+        // TODO: remove
+        this.backendService.choDetilsSubscription('http://opendata.cs.pub.ro/resource/CHO/CIMEC/6066DEF2041945B988FA7C17FCAC1C2A');
     }
 
     @Input() filter: CHOFilter;
@@ -104,7 +107,7 @@ export class CHOFilterComponent implements OnInit {
         filter.displayState = CHO_DISPLAY_STATES.MEDIOCRE;
         filter.type = CHO_TYPES.BIOLOGICAL_OBJECT;
 
-        this.backendService.museumsSubscription(this.filter);
+        this.backendService.museumsSummariesSubscription(this.filter);
         this.backendService.choCounterSubscription(this.filter);
 
         this.onFilterApply && this.onFilterApply();
