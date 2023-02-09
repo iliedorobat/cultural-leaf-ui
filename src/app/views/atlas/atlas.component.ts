@@ -1,6 +1,6 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {NgbOffcanvas, NgbOffcanvasOptions} from '@ng-bootstrap/ng-bootstrap';
-import {GeoJSON, Layer, Map} from 'leaflet';
+import {Control, DomUtil, GeoJSON, Layer, Map} from 'leaflet';
 import {Observable, Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 
@@ -72,6 +72,7 @@ export class AtlasComponent implements OnInit {
 
     onMapReady(map: Map) {
         this.map = map;
+        this.onButtonFilterAdd(map);
         this.eventsService.addMapEvents(map);
 
         this.backendService.museumsSummaries$
@@ -82,7 +83,23 @@ export class AtlasComponent implements OnInit {
             });
     }
 
-    open() {
+    onButtonFilterAdd(map: Map) {
+        const CustomControl = Control.extend({
+            onAdd(map: Map) {
+                return DomUtil.get('filter-controller');
+            },
+            onRemove(map: Map) {}
+        });
+        const custom = new CustomControl({
+            position: 'topleft'
+        });
+        map.addControl(custom)
+    }
+
+    onOpenSidebar(event: Event) {
+        event.preventDefault();
+        event.stopPropagation();
+
         // const options = {
         //     panelClass: 'atlas-filter',
         //     scroll: true

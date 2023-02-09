@@ -1,20 +1,18 @@
-$zoom-control-radius: 30px;
-$zoom-control-font-size: 22px;
+@import 'src/assets/styles/variables';
 
 .map {
     height: 100%;
     padding: 0;
     z-index: 1;
-}
 
-.offcanvas-btn {
-    position: absolute;
-    top: 5 * 16px;
-    z-index: 1;
-    width: $zoom-control-radius;
-    height: $zoom-control-radius;
-    line-height: $zoom-control-radius;
-    font-size: $zoom-control-font-size;
-    border-radius: 4px;
-    left: 10px;
+    #filter-controller > a {
+        font-size: 30px;
+    }
+
+    ::ng-deep {
+        .leaflet-control-layers-toggle {
+            width: 30px;
+            height: 30px;
+        }
+    }
 }
