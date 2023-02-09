@@ -6,25 +6,41 @@
 
     <form class="needs-validation" [formGroup]="form" (submit)="onSubmit()">
         <ngb-accordion activeIds="general-info-filter">
-            <ngb-panel id="general-info-filter" title="Main CHOs Filter">
+            <ngb-panel id="general-info-filter">
+                <ng-template ngbPanelTitle>
+                    <div class="title">Main CHOs Filter</div>
+                    <button class="btn btn-link btn-reset-section" (click)="onSectionReset($event)">Reset</button>
+                </ng-template>
                 <ng-template ngbPanelContent>
                     <lmap-general-info-cho-filter [filter]="filter" [form]="form"></lmap-general-info-cho-filter>
                 </ng-template>
             </ngb-panel>
 
-            <ngb-panel title="Current Location">
+            <ngb-panel id="current-location">
+                <ng-template ngbPanelTitle>
+                    <div class="title">Current Location</div>
+                    <button class="btn btn-link btn-reset-section" (click)="onSectionReset($event)">Reset</button>
+                </ng-template>
                 <ng-template ngbPanelContent>
                     <lmap-locations-cho-filter [filter]="filter" [form]="form"></lmap-locations-cho-filter>
                 </ng-template>
             </ngb-panel>
 
-            <ngb-panel title="Creation Period (Interval)">
+            <ngb-panel id="creation-period">
+                <ng-template ngbPanelTitle>
+                    <div class="title">Creation Period (Interval)</div>
+                    <button class="btn btn-link btn-reset-section" (click)="onSectionReset($event)">Reset</button>
+                </ng-template>
                 <ng-template ngbPanelContent>
                     <lmap-events-cho-filter [filterInterval]="filter.creationInterval" [form]="form"></lmap-events-cho-filter>
                 </ng-template>
             </ngb-panel>
 
-            <ngb-panel title="Finding Period (Interval)">
+            <ngb-panel id="finding-period">
+                <ng-template ngbPanelTitle>
+                    <div class="title">Finding Period (Interval)</div>
+                    <button class="btn btn-link btn-reset-section" (click)="onSectionReset($event)">Reset</button>
+                </ng-template>
                 <ng-template ngbPanelContent>
                     <lmap-events-cho-filter [filterInterval]="filter.foundInterval" [form]="form"></lmap-events-cho-filter>
                 </ng-template>
@@ -38,13 +54,21 @@
             <!--                </ng-template>-->
             <!--            </ngb-panel>-->
 
-            <ngb-panel title="Medal Filter">
+            <ngb-panel id="medal-filter">
+                <ng-template ngbPanelTitle>
+                    <div class="title">Medal Filter</div>
+                    <button class="btn btn-link btn-reset-section" (click)="onSectionReset($event)">Reset</button>
+                </ng-template>
                 <ng-template ngbPanelContent>
                     <lmap-medal-cho-filter [filter]="filter" [form]="form"></lmap-medal-cho-filter>
                 </ng-template>
             </ngb-panel>
 
-            <ngb-panel title="Natural Science Filter">
+            <ngb-panel id="natural-science-filter">
+                <ng-template ngbPanelTitle>
+                    <div class="title">Natural Science Filter</div>
+                    <button class="btn btn-link btn-reset-section" (click)="onSectionReset($event)">Reset</button>
+                </ng-template>
                 <ng-template ngbPanelContent>
                     <lmap-natural-science-cho-filter [filter]="filter" [form]="form"></lmap-natural-science-cho-filter>
                 </ng-template>

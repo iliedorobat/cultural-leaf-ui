@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {NgbActiveOffcanvas, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Observable} from 'rxjs';
+import * as _ from 'lodash';
 
 import {
     AbstractControl,
@@ -13,8 +14,9 @@ import {
 } from '@angular/forms';
 import {CHOSummaryScreenComponent} from '../summary-screen/cho-summary-screen.component';
 import {BackendService} from '../../../shared/services/backend.service';
-import {CHO_DISPLAY_STATES, CHO_TYPES, CHOFilter} from '../../../shared/types/cho/CHOFilter';
 import {TableService} from '../../../shared/components/table/table.service';
+
+import {CHO_DISPLAY_STATES, CHO_TYPES, CHOFilter, FilterInterval} from '../../../shared/types/cho/CHOFilter';
 
 @Component({
     selector: 'lmap-cho-filter',
@@ -108,6 +110,40 @@ export class CHOFilterComponent implements OnInit {
         this.backendService.choCounterSubscription(this.filter);
 
         this.onFilterApply && this.onFilterApply();
+    }
+
+    onSectionReset(event: Event) {
+        event.stopPropagation();
+        const target = event.target as HTMLElement;
+        const value = _.get(target, ['offsetParent', 'attributes', 'aria-controls', 'value']);
+
+        switch (value) {
+            case 'general-info-filter':
+                this.filter.title = null;
+                this.filter.inventoryNumber = null;
+                this.filter.displayState = null;
+                this.filter.type = null;
+                break;
+            case 'current-location':
+                this.filter.county = null;
+                break;
+            case 'creation-period':
+                this.filter.creationInterval = new FilterInterval();
+                break;
+            case 'finding-period':
+                this.filter.foundInterval = new FilterInterval();
+                break;
+            case 'medal-filter':
+                this.filter.medalFilter.shape = null;
+                break;
+            case 'natural-science-filter':
+                this.filter.natureFilter.age = null;
+                this.filter.natureFilter.epoch = null;
+                this.filter.natureFilter.sex = null;
+                break;
+            default:
+                break;
+        }
     }
 
     openCHOsModal = () => {
