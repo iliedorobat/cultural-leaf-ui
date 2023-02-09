@@ -52,6 +52,12 @@ export class CHOFilterComponent implements OnInit {
 
     form: FormGroup;
 
+    ngOnInit(): void {
+        this.form = this.formBuilder.group(
+            this.createFormControls()
+        );
+    }
+
     createFormControls() {
         return {
             county: new FormControl,
@@ -93,11 +99,17 @@ export class CHOFilterComponent implements OnInit {
         }
     }
 
-    ngOnInit(): void {
-        this.form = this.formBuilder.group(
-            this.createFormControls()
+    isMedalFilterTouched = () => {
+        return !!this.filter.medalFilter.shape;
+    };
+
+    isNatureFilterTouched = () => {
+        return !!(
+            this.filter.natureFilter.age ||
+            this.filter.natureFilter.epoch ||
+            this.filter.natureFilter.sex
         );
-    }
+    };
 
     // TODO: form control validation: https://github.com/loiane/angular-reactive-forms-validate-submit/blob/97a7e9ebd834b0913c15a0fc27fe19b2ffe9a05d/src/app/validate-fields-submit-form/validate-fields-submit-form.component.ts#L54
     onSubmit() {

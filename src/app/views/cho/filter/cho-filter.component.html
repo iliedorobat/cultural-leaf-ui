@@ -4,12 +4,15 @@
         Results: {{ totalCHOs$ | async | number }} CHOs
     </button>
 
-    <form class="needs-validation" [formGroup]="form" (submit)="onSubmit()">
+    <form class="needs-validation" [formGroup]="form">
         <ngb-accordion activeIds="general-info-filter">
             <ngb-panel id="general-info-filter">
                 <ng-template ngbPanelTitle>
                     <div class="title">Main CHOs Filter</div>
-                    <button class="btn btn-link btn-reset-section" (click)="onSectionReset($event)">Reset</button>
+                    <button
+                            class="btn btn-link btn-reset-section"
+                            (click)="onSectionReset($event)"
+                    >Reset</button>
                 </ng-template>
                 <ng-template ngbPanelContent>
                     <lmap-general-info-cho-filter [filter]="filter" [form]="form"></lmap-general-info-cho-filter>
@@ -19,7 +22,10 @@
             <ngb-panel id="current-location">
                 <ng-template ngbPanelTitle>
                     <div class="title">Current Location</div>
-                    <button class="btn btn-link btn-reset-section" (click)="onSectionReset($event)">Reset</button>
+                    <button
+                            class="btn btn-link btn-reset-section"
+                            (click)="onSectionReset($event)"
+                    >Reset</button>
                 </ng-template>
                 <ng-template ngbPanelContent>
                     <lmap-locations-cho-filter [filter]="filter" [form]="form"></lmap-locations-cho-filter>
@@ -29,7 +35,10 @@
             <ngb-panel id="creation-period">
                 <ng-template ngbPanelTitle>
                     <div class="title">Creation Period (Interval)</div>
-                    <button class="btn btn-link btn-reset-section" (click)="onSectionReset($event)">Reset</button>
+                    <button
+                            class="btn btn-link btn-reset-section"
+                            (click)="onSectionReset($event)"
+                    >Reset</button>
                 </ng-template>
                 <ng-template ngbPanelContent>
                     <lmap-events-cho-filter [filterInterval]="filter.creationInterval" [form]="form"></lmap-events-cho-filter>
@@ -39,7 +48,10 @@
             <ngb-panel id="finding-period">
                 <ng-template ngbPanelTitle>
                     <div class="title">Finding Period (Interval)</div>
-                    <button class="btn btn-link btn-reset-section" (click)="onSectionReset($event)">Reset</button>
+                    <button
+                            class="btn btn-link btn-reset-section"
+                            (click)="onSectionReset($event)"
+                    >Reset</button>
                 </ng-template>
                 <ng-template ngbPanelContent>
                     <lmap-events-cho-filter [filterInterval]="filter.foundInterval" [form]="form"></lmap-events-cho-filter>
@@ -54,20 +66,28 @@
             <!--                </ng-template>-->
             <!--            </ngb-panel>-->
 
-            <ngb-panel id="medal-filter">
+            <ngb-panel id="medal-filter" [disabled]="isNatureFilterTouched()">
                 <ng-template ngbPanelTitle>
                     <div class="title">Medal Filter</div>
-                    <button class="btn btn-link btn-reset-section" (click)="onSectionReset($event)">Reset</button>
+                    <button
+                            class="btn btn-link btn-reset-section"
+                            [disabled]="isNatureFilterTouched()"
+                            (click)="onSectionReset($event)"
+                    >Reset</button>
                 </ng-template>
                 <ng-template ngbPanelContent>
                     <lmap-medal-cho-filter [filter]="filter" [form]="form"></lmap-medal-cho-filter>
                 </ng-template>
             </ngb-panel>
 
-            <ngb-panel id="natural-science-filter">
+            <ngb-panel id="natural-science-filter" [disabled]="isMedalFilterTouched()">
                 <ng-template ngbPanelTitle>
                     <div class="title">Natural Science Filter</div>
-                    <button class="btn btn-link btn-reset-section" (click)="onSectionReset($event)">Reset</button>
+                    <button
+                            class="btn btn-link btn-reset-section"
+                            [disabled]="isMedalFilterTouched()"
+                            (click)="onSectionReset($event)"
+                    >Reset</button>
                 </ng-template>
                 <ng-template ngbPanelContent>
                     <lmap-natural-science-cho-filter [filter]="filter" [form]="form"></lmap-natural-science-cho-filter>
@@ -76,7 +96,7 @@
         </ngb-accordion>
 
         <div class="form-footer">
-            <button class="btn btn-md btn-success" type="submit">Apply Filter</button>
+            <button class="btn btn-md btn-success" type="submit" (click)="onSubmit()">Apply Filter</button>
             <button class="btn btn-md btn-secondary" type="reset" (click)="form.reset()">Reset Filter</button>
         </div>
     </form>

@@ -1,5 +1,3 @@
-// TODO: update accordingly to the backend response
-
 export interface CHODetails extends Object {
     [index: string]: any;
 
