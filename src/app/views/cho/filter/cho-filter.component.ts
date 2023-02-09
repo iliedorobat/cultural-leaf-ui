@@ -5,7 +5,6 @@ import * as _ from 'lodash';
 
 import {
     AbstractControl,
-    FormBuilder,
     FormControl,
     FormGroup,
     ValidationErrors,
@@ -30,7 +29,6 @@ export class CHOFilterComponent implements OnInit {
     constructor(
         public activeOffcanvas: NgbActiveOffcanvas,
         private backendService: BackendService,
-        private formBuilder: FormBuilder,
         private modalService: NgbModal,
         public tableService: TableService
     ) {
@@ -53,20 +51,42 @@ export class CHOFilterComponent implements OnInit {
     form: FormGroup;
 
     ngOnInit(): void {
-        this.form = this.formBuilder.group(
-            this.createFormControls()
-        );
-    }
-
-    createFormControls() {
-        return {
+        this.form = new FormGroup({
             county: new FormControl,
             displayState: new FormControl(),
-            endDate: new FormControl(this.filter.creationInterval?.end.date, [
-                this.timePeriodValidator('endDate', 'endRange')
+            creationEndDate: new FormControl(this.filter.creationInterval?.end.date, [
+                this.timePeriodNumberValidator('creationEndDate'),
+                this.timePeriodValidator('creationEndDate', 'creationEndRange'),
+                this.timePeriodIntervalValidator('creationStartDate', 'creationEndDate')
             ]),
-            endRange: new FormControl(),
+            creationEndRange: new FormControl(this.filter.creationInterval?.end.range, [
+                this.timePeriodRangeValidator('creationStartRange', 'creationEndRange')
+            ]),
+            creationStartDate: new FormControl(this.filter.creationInterval?.start.date, [
+                this.timePeriodNumberValidator('creationStartDate'),
+                this.timePeriodValidator('creationStartDate', 'creationStartRange'),
+                this.timePeriodIntervalValidator('creationStartDate', 'creationEndDate')
+            ]),
+            creationStartRange: new FormControl(this.filter.creationInterval?.start.range, [
+                this.timePeriodRangeValidator('creationStartRange', 'creationEndRange')
+            ]),
             epoch: new FormControl(),
+            foundEndDate: new FormControl(this.filter.foundInterval?.end.date, [
+                this.timePeriodNumberValidator('foundEndDate'),
+                this.timePeriodValidator('foundEndDate', 'foundEndRange'),
+                this.timePeriodIntervalValidator('foundStartDate', 'foundEndDate')
+            ]),
+            foundEndRange: new FormControl(this.filter.foundInterval?.end.range, [
+                this.timePeriodRangeValidator('foundStartRange', 'foundEndRange')
+            ]),
+            foundStartDate: new FormControl(this.filter.foundInterval?.start.date, [
+                this.timePeriodNumberValidator('foundStartDate'),
+                this.timePeriodValidator('foundStartDate', 'foundStartRange'),
+                this.timePeriodIntervalValidator('foundStartDate', 'foundEndDate')
+            ]),
+            foundStartRange: new FormControl(this.filter.foundInterval?.start.range, [
+                this.timePeriodRangeValidator('foundStartRange', 'foundEndRange')
+            ]),
             inventoryNumber: new FormControl(this.filter.inventoryNumber, [
                 Validators.minLength(3)
             ]),
@@ -74,30 +94,106 @@ export class CHOFilterComponent implements OnInit {
             natureAge: new FormControl(),
             natureEpoch: new FormControl(),
             natureSex: new FormControl(),
-            startDate: new FormControl(this.filter.creationInterval?.start.date, [
-                this.timePeriodValidator('startDate', 'startRange')
-            ]),
-            startRange: new FormControl(),
             title: new FormControl(this.filter.title, [
                 Validators.minLength(3)
             ]),
             type: new FormControl()
-        };
+        });
     }
+
+    timePeriodRangeValidator = (startRangeName: string, endRangeName: string) => {
+        return (control: AbstractControl): ValidationErrors | null => {
+            const startRange  = this.form?.controls?.[startRangeName].value;
+            const endRange  = this.form?.controls?.[endRangeName].value;
+
+            if (startRange && endRange) {
+                if (startRange !== endRange) {
+                    return {
+                        invalidTimeRange: {
+                            error: 'The range of the start & end edges should be sa same!',
+                            value: {
+                                startRange,
+                                endRange
+                            }
+                        }
+                    };
+                }
+            }
+
+            return null;
+        };
+    };
+
+    timePeriodIntervalValidator = (startDateName: string, endDateName: string) => {
+        return (control: AbstractControl): ValidationErrors | null => {
+            const startDate  = this.form?.controls?.[startDateName].value;
+            const endDate  = this.form?.controls?.[endDateName].value;
+
+            if (startDate && endDate) {
+                if (startDate > endDate) {
+                    return {
+                        invalidTimeInterval: {
+                            error: 'The end of the interval cannot be lower than the start!',
+                            value: {
+                                startDate,
+                                endDate
+                            }
+                        }
+                    };
+                }
+            }
+
+            return null;
+        };
+    };
+
+    timePeriodNumberValidator = (dateName: string) => {
+        return (control: AbstractControl): ValidationErrors | null => {
+            const date  = this.form?.controls?.[dateName].value;
+
+            if (date === 0) {
+                return {
+                    invalidTimePeriod: {
+                        error: 'Time period cannot be 0!',
+                        value: date
+                    }
+                };
+            }
+
+            return null;
+        };
+    };
 
     timePeriodValidator = (dateName: string, rangeName: string): ValidatorFn => {
         return (control: AbstractControl): ValidationErrors | null => {
-            const startDate  = this.form?.controls?.[dateName].value;
-            const startRange  = this.form?.controls?.[rangeName].value;
+            const date  = this.form?.controls?.[dateName].value;
+            const range  = this.form?.controls?.[rangeName].value;
 
-            if (!startDate) {
+            if (!date && !range) {
                 return null;
             }
-            return !startRange
-                ? {rangeRequired: {value: !!startRange}}
-                : null;
+
+            if (!date) {
+                return {
+                    startDateRequired: {
+                        error: 'The date is required!',
+                        value: date
+                    }
+                };
+            }
+
+            if (!range) {
+                return {
+                    rangeRequired: {
+                        error: 'The range is required!',
+                        value: range
+                    }
+                };
+            }
+
+            return null;
         }
-    }
+    };
 
     isMedalFilterTouched = () => {
         return !!this.filter.medalFilter.shape;

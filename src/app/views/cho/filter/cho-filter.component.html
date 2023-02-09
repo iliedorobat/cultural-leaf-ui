@@ -41,7 +41,7 @@
                     >Reset</button>
                 </ng-template>
                 <ng-template ngbPanelContent>
-                    <lmap-events-cho-filter [filterInterval]="filter.creationInterval" [form]="form"></lmap-events-cho-filter>
+                    <lmap-events-cho-filter [filterInterval]="filter.creationInterval" [form]="form" formControlPrefix="creation"></lmap-events-cho-filter>
                 </ng-template>
             </ngb-panel>
 
@@ -54,7 +54,7 @@
                     >Reset</button>
                 </ng-template>
                 <ng-template ngbPanelContent>
-                    <lmap-events-cho-filter [filterInterval]="filter.foundInterval" [form]="form"></lmap-events-cho-filter>
+                    <lmap-events-cho-filter [filterInterval]="filter.foundInterval" [form]="form" formControlPrefix="found"></lmap-events-cho-filter>
                 </ng-template>
             </ngb-panel>
         </ngb-accordion>

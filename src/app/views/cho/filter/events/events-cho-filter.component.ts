@@ -10,6 +10,7 @@ import {DATE_RANGES, FilterInterval} from '../../../../shared/types/cho/CHOFilte
 export class EventsChoFilterComponent {
     @Input() filterInterval: FilterInterval;
     @Input() form: FormGroup;
+    @Input() formControlPrefix: string;
 
     DATE_RANGES = Object.values(DATE_RANGES);
 
