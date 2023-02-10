@@ -7,11 +7,11 @@ import {BackendService} from '../../../shared/services/backend.service';
 import {CHODetails} from '../../../shared/types/cho/CHODetails';
 import {CHOFilter} from '../../../shared/types/cho/CHOFilter';
 import {CHOSummary} from '../../../shared/types/cho/CHOSummary';
-import {DetailsScreenComponent} from '../../../shared/models/details-screen/details-screen.component';
+import {DetailsScreenComponent} from '../../../shared/screens/details-screen/details-screen.component';
 import {SortableHeader, SortEvent} from '../../../shared/components/table/sortable.directive';
 import {TableService} from '../../../shared/components/table/table.service';
 
-import {CHO_SECTIONS_ORDER} from '../../../shared/models/details-screen/details-screen.const';
+import {CHO_SECTIONS_ORDER} from '../../../shared/screens/details-screen/details-screen.const';
 import {ENTITY_TYPE} from '../../../shared/constants/entity.enum';
 
 @Component({

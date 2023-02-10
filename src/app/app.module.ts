@@ -17,13 +17,13 @@ import {AtlasComponent} from './views/atlas/atlas.component';
 import {CHOFilterComponent} from './views/cho/filter/cho-filter.component';
 import {CHOSummaryScreenComponent} from './views/cho/summary-screen/cho-summary-screen.component';
 import {DecimalPipe} from '@angular/common';
-import {DetailsScreenComponent} from './shared/models/details-screen/details-screen.component';
+import {DetailsScreenComponent} from './shared/screens/details-screen/details-screen.component';
 import {
     DetailsScreenSectionPipe,
     DetailsScreenSectionSubtitlePipe,
     DetailsScreenSectionTitlePipe,
     DetailsScreenSectionValuePipe
-} from './shared/models/details-screen/details-screen.pipe';
+} from './shared/screens/details-screen/details-screen.pipe';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HorizontalLineComponent} from './shared/components/horizontal-line/horizontal-line';
 import {SectionPaneComponent} from './shared/components/panes/section-pane/section-pane.component';
