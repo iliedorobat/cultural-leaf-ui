@@ -103,6 +103,12 @@ export enum NATURE_SEXES {
     UNKNOWN = 'Unknown'
 }
 
+export enum TIMESPAN_TYPE {
+    CENTURY = 'Century',
+    MILLENNIUM = 'Millennium',
+    OTHERS = 'Others'
+}
+
 
 
 

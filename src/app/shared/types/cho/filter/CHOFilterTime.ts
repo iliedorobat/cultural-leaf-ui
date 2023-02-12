@@ -1,4 +1,4 @@
-import {DATE_RANGES} from './filter.const';
+import {DATE_RANGES} from '../../../constants/filter.enum';
 
 export class CHOFilterTime {
     constructor(range?: DATE_RANGES | null) {

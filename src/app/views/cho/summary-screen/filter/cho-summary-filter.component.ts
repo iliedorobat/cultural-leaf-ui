@@ -11,12 +11,13 @@ import {
     ValidatorFn,
     Validators
 } from '@angular/forms';
-import {CHOSummaryScreenComponent} from '../cho-summary-screen.component';
-import {BackendService} from '../../../../shared/services/backend.service';
-import {TableService} from '../../../../shared/components/table/table.service';
 
-import {CHOFilter, FilterInterval} from '../../../../shared/types/cho/CHOFilter';
+import {BackendService} from '../../../../shared/services/backend.service';
+import {CHOFilter, FilterInterval} from '../../../../shared/types/cho/filter/CHOFilter';
+import {CHOSummaryScreenComponent} from '../cho-summary-screen.component';
 import {CHOStatsScreenComponent} from '../../stats-screen/cho-stats-screen.component';
+import {FilterUtils} from '../../stats-screen/filter/filter.utils';
+import {TableService} from '../../../../shared/components/table/table.service';
 
 @Component({
     selector: 'lmap-cho-summary-filter',
@@ -196,17 +197,9 @@ export class CHOSummaryFilterComponent implements OnInit {
         }
     };
 
-    isMedalFilterTouched = () => {
-        return !!this.filter.medalFilter.shape;
-    };
+    isMedalFilterTouched = FilterUtils.isMedalFilterTouched;
 
-    isNatureFilterTouched = () => {
-        return !!(
-            this.filter.natureFilter.age ||
-            this.filter.natureFilter.epoch ||
-            this.filter.natureFilter.sex
-        );
-    };
+    isNatureFilterTouched = FilterUtils.isNatureFilterTouched;
 
     // TODO: form control validation: https://github.com/loiane/angular-reactive-forms-validate-submit/blob/97a7e9ebd834b0913c15a0fc27fe19b2ffe9a05d/src/app/validate-fields-submit-form/validate-fields-submit-form.component.ts#L54
     onSubmit() {

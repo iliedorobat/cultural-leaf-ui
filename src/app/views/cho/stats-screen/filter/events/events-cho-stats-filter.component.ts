@@ -1,8 +1,8 @@
 import {Component, Input} from '@angular/core';
 import {FormGroup} from '@angular/forms';
 
-import {DATE_RANGES} from '../../../../../shared/types/cho/filter.const';
-import {CHOFilterTime} from '../../../../../shared/types/cho/CHOFilterTime';
+import {CHOFilterTime} from '../../../../../shared/types/cho/filter/CHOFilterTime';
+import {DATE_RANGES} from '../../../../../shared/constants/filter.enum';
 
 @Component({
     selector: 'lmap-events-cho-stats-filter',

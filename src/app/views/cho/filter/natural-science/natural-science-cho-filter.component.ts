@@ -1,9 +1,9 @@
 import {Component, Input} from '@angular/core';
 import {FormGroup} from '@angular/forms';
 
-import {CHOFilter} from '../../../../shared/types/cho/CHOFilter';
-import {CHOStatsFilter} from '../../../../shared/types/cho/CHOStatsFilter';
-import {NATURE_AGES, NATURE_EPOCHS, NATURE_SEXES} from '../../../../shared/types/cho/filter.const';
+import {CHOFilter} from '../../../../shared/types/cho/filter/CHOFilter';
+import {CHOStatsFilter} from '../../../../shared/types/cho/stats/CHOStatsFilter';
+import {NATURE_AGES, NATURE_EPOCHS, NATURE_SEXES} from '../../../../shared/constants/filter.enum';
 
 @Component({
     selector: 'lmap-natural-science-cho-filter',

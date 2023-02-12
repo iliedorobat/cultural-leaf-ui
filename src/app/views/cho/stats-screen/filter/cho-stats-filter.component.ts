@@ -1,8 +1,10 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {CHOFilterTime} from '../../../../shared/types/cho/CHOFilterTime';
-import {CHOStatsFilter} from '../../../../shared/types/cho/CHOStatsFilter';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import * as _ from 'lodash';
+
+import {CHOFilterTime} from '../../../../shared/types/cho/filter/CHOFilterTime';
+import {CHOStatsFilter} from '../../../../shared/types/cho/stats/CHOStatsFilter';
+import {FilterUtils} from './filter.utils';
 
 @Component({
     selector: 'lmap-cho-stats-filter',
@@ -36,21 +38,10 @@ export class ChoStatsFilterComponent implements OnInit {
         });
     }
 
-    // TODO: merge with cho-filter.component.ts
-    isMedalFilterTouched = () => {
-        return !!this.filter.medalFilter.shape;
-    };
+    isMedalFilterTouched = FilterUtils.isMedalFilterTouched;
 
-    // TODO: merge with cho-filter.component.ts
-    isNatureFilterTouched = () => {
-        return !!(
-            this.filter.natureFilter.age ||
-            this.filter.natureFilter.epoch ||
-            this.filter.natureFilter.sex
-        );
-    };
+    isNatureFilterTouched = FilterUtils.isNatureFilterTouched;
 
-    // TODO:
     onSubmit() {
         this.onFilterApply && this.onFilterApply();
     }

@@ -5,7 +5,7 @@ import {Observable} from 'rxjs';
 
 import {BackendService} from '../../../shared/services/backend.service';
 import {CHODetails} from '../../../shared/types/cho/CHODetails';
-import {CHOFilter} from '../../../shared/types/cho/CHOFilter';
+import {CHOFilter} from '../../../shared/types/cho/filter/CHOFilter';
 import {CHOSummary} from '../../../shared/types/cho/CHOSummary';
 import {DetailsScreenComponent} from '../../../shared/screens/details-screen/details-screen.component';
 import {SortableHeader, SortEvent} from '../../../shared/components/table/sortable.directive';

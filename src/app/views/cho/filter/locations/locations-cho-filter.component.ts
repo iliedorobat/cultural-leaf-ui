@@ -1,9 +1,9 @@
 import {Component, Input} from '@angular/core';
 import {FormGroup} from '@angular/forms';
 
-import {CHOFilter} from '../../../../shared/types/cho/CHOFilter';
-import {CHOStatsFilter} from '../../../../shared/types/cho/CHOStatsFilter';
-import {COUNTIES} from '../../../../shared/types/cho/filter.const';
+import {CHOFilter} from '../../../../shared/types/cho/filter/CHOFilter';
+import {CHOStatsFilter} from '../../../../shared/types/cho/stats/CHOStatsFilter';
+import {COUNTIES} from '../../../../shared/constants/filter.enum';
 
 @Component({
     selector: 'lmap-locations-cho-filter',

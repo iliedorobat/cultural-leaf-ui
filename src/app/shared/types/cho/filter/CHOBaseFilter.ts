@@ -6,7 +6,7 @@ import {
     NATURE_EPOCHS,
     NATURE_SEXES,
     RO_EPOCHS
-} from './filter.const';
+} from '../../../constants/filter.enum';
 
 export class CHOBaseFilter {
     public county: COUNTIES | null = null;

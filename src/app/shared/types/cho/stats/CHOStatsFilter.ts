@@ -1,6 +1,6 @@
-import {CHOBaseFilter} from './CHOBaseFilter';
-import {DATE_RANGES} from './filter.const';
-import {CHOFilterTime} from './CHOFilterTime';
+import {CHOBaseFilter} from '../filter/CHOBaseFilter';
+import {CHOFilterTime} from '../filter/CHOFilterTime';
+import {DATE_RANGES} from '../../../constants/filter.enum';
 
 export class CHOStatsFilter extends CHOBaseFilter {
     creationTime: CHOFilterTime = new CHOFilterTime(DATE_RANGES.CENTURY);

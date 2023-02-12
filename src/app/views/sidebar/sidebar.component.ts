@@ -1,6 +1,7 @@
 import {Component, Input} from '@angular/core';
-import {CHOFilter} from '../../shared/types/cho/CHOFilter';
 import {NgbActiveOffcanvas} from '@ng-bootstrap/ng-bootstrap';
+
+import {CHOFilter} from '../../shared/types/cho/filter/CHOFilter';
 
 @Component({
     selector: 'lmap-sidebar',

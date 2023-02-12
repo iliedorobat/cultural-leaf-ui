@@ -2,14 +2,15 @@ import {Component, Input} from '@angular/core';
 import {LegendPosition} from '@swimlane/ngx-charts';
 import {Color} from '@swimlane/ngx-charts/lib/utils/color-sets';
 
+import {CHOEventStatsEntry} from '../../../../shared/types/cho/stats/CHOEventStats';
+
 @Component({
     selector: 'lmap-cho-stats-pie-chart',
     templateUrl: './cho-stats-pie-chart.component.html',
     styleUrls: ['./cho-stats-pie-chart.component.scss'],
 })
 export class ChoStatsPieChartComponent {
-    // TODO:
-    @Input() dataset: any[] = [];
+    @Input() dataset: CHOEventStatsEntry[] = [];
     @Input() title: string;
     view: [number, number] = [800, 500];
 

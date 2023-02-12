@@ -1,9 +1,9 @@
 import {Component, Input} from '@angular/core';
 import {FormGroup} from '@angular/forms';
 
-import {CHOFilter} from '../../../../shared/types/cho/CHOFilter';
-import {CHOStatsFilter} from '../../../../shared/types/cho/CHOStatsFilter';
-import {CHO_DISPLAY_STATES, CHO_TYPES} from '../../../../shared/types/cho/filter.const';
+import {CHOFilter} from '../../../../shared/types/cho/filter/CHOFilter';
+import {CHOStatsFilter} from '../../../../shared/types/cho/stats/CHOStatsFilter';
+import {CHO_DISPLAY_STATES, CHO_TYPES} from '../../../../shared/constants/filter.enum';
 
 @Component({
     selector: 'lmap-general-info-cho-filter',

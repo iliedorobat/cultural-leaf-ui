@@ -4,13 +4,13 @@ import {Control, DomUtil, GeoJSON, Layer, Map} from 'leaflet';
 import {Observable, Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 
-import {CHOFilter} from '../../shared/types/cho/CHOFilter';
-import {SidebarComponent} from '../sidebar/sidebar.component';
 import {AtlasService} from './atlas.service';
 import {BackendService} from '../../shared/services/backend.service';
+import {CHOFilter} from '../../shared/types/cho/filter/CHOFilter';
 import {EventsService} from './events.service';
 import {LayersService} from './layers.service';
 import {MuseumSummary} from '../../shared/types/museum/MuseumSummary';
+import {SidebarComponent} from '../sidebar/sidebar.component';
 
 import {COUNTIES} from 'src/app/shared/constants/geo.const';
 import {ENTITY_TYPE} from 'src/app/shared/constants/entity.enum';

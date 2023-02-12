@@ -3,8 +3,8 @@ import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {TranslateService} from '@ngx-translate/core';
 
 import {BackendService} from '../../../shared/services/backend.service';
-import {TIMESPAN_TYPE} from '../../../shared/constants/entity.enum';
-import {CHOStatsFilter} from '../../../shared/types/cho/CHOStatsFilter';
+import {CHOStatsFilter} from '../../../shared/types/cho/stats/CHOStatsFilter';
+import {CHOEventStatsEntry} from '../../../shared/types/cho/stats/CHOEventStats';
 
 @Component({
     selector: 'lmap-cho-stats-screen',
@@ -20,9 +20,8 @@ export class CHOStatsScreenComponent implements OnInit {
     ) {}
     filter: CHOStatsFilter = new CHOStatsFilter();
 
-    // TODO: any
-    creationDataset: any[] = [];
-    foundDataset: any[] = [];
+    creationDataset: CHOEventStatsEntry[] = [];
+    foundDataset: CHOEventStatsEntry[] = [];
     showCreationLabels: boolean = false;
     showFoundLabels: boolean = false;
 
