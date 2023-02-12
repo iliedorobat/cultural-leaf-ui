@@ -12,17 +12,24 @@
 
     <div class="content">
         <lmap-cho-stats-pie-chart
-                title="Top 10 Creation Event Timespans"
-                *ngIf="filter.creationTime.show"
-                [dataset]="creationDataset"
-                [showLabels]="showCreationLabels"
+                title="Top 10 Production Timespans"
+                *ngIf="filter.productionTime.show"
+                [dataset]="productionDataset"
+                [showLabels]="showProductionLabels"
         ></lmap-cho-stats-pie-chart>
         <br />
         <lmap-cho-stats-pie-chart
-                title="Top 10 Finding Event Timespans"
-                *ngIf="filter.foundTime.show"
-                [dataset]="foundDataset"
-                [showLabels]="showFoundLabels"
+                title="Top 10 Finding Timespans"
+                *ngIf="filter.findingTime.show"
+                [dataset]="findingDataset"
+                [showLabels]="showFindingLabels"
+        ></lmap-cho-stats-pie-chart>
+        <br />
+        <lmap-cho-stats-pie-chart
+                title="Top 10 Collecting Timespans"
+                *ngIf="filter.collectingTime.show"
+                [dataset]="collectingDataset"
+                [showLabels]="showCollectingLabels"
         ></lmap-cho-stats-pie-chart>
     </div>
 </div>

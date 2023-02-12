@@ -29,8 +29,9 @@ export class BackendService {
     // private _museumDetails$: BehaviorSubject<Museum> = new BehaviorSubject<Museum>({} as Museum);
     private _choCount$: BehaviorSubject<Counter> = new BehaviorSubject<Counter>({count: 0} as Counter);
     private _choDetails$: BehaviorSubject<CHODetails> = new BehaviorSubject<CHODetails>({} as CHODetails);
-    private _chosCreationStats$: BehaviorSubject<CHOEventStats> = new BehaviorSubject<CHOEventStats>({} as CHOEventStats);
-    private _chosFoundStats$: BehaviorSubject<CHOEventStats> = new BehaviorSubject<CHOEventStats>({} as CHOEventStats);
+    private _chosCollectingStats$: BehaviorSubject<CHOEventStats> = new BehaviorSubject<CHOEventStats>({} as CHOEventStats);
+    private _chosFindingStats$: BehaviorSubject<CHOEventStats> = new BehaviorSubject<CHOEventStats>({} as CHOEventStats);
+    private _chosProductionStats$: BehaviorSubject<CHOEventStats> = new BehaviorSubject<CHOEventStats>({} as CHOEventStats);
     private _chosSummaries$: BehaviorSubject<CHOSummary[]> = new BehaviorSubject<CHOSummary[]>([]);
 
     public retrieveChoCounter(payload: CHOFilter | null): Observable<Counter> {
@@ -84,17 +85,24 @@ export class BackendService {
             });
     }
 
-    public chosCreationStatsSubscription(payload: CHOStatsFilter, timespanType: DATE_RANGES | null) {
-        this.getCHOsStats(payload, EVENT_TYPE.PRODUCTION, (timespanType || DATE_RANGES.CENTURY))
+    public chosCollectingStatsSubscription(payload: CHOStatsFilter, timespanType: DATE_RANGES | null) {
+        this.getCHOsStats(payload, EVENT_TYPE.COLLECTING, (timespanType || DATE_RANGES.CENTURY))
             .subscribe((data: CHOEventStats) => {
-                this._chosCreationStats$.next(data);
+                this._chosCollectingStats$.next(data);
             });
     }
 
-    public chosFoundStatsSubscription(payload: CHOStatsFilter, timespanType: DATE_RANGES | null) {
+    public chosFindingStatsSubscription(payload: CHOStatsFilter, timespanType: DATE_RANGES | null) {
         this.getCHOsStats(payload, EVENT_TYPE.FINDING, (timespanType || DATE_RANGES.CENTURY))
             .subscribe((data: CHOEventStats) => {
-                this._chosFoundStats$.next(data);
+                this._chosFindingStats$.next(data);
+            });
+    }
+
+    public chosProductionStatsSubscription(payload: CHOStatsFilter, timespanType: DATE_RANGES | null) {
+        this.getCHOsStats(payload, EVENT_TYPE.PRODUCTION, (timespanType || DATE_RANGES.CENTURY))
+            .subscribe((data: CHOEventStats) => {
+                this._chosProductionStats$.next(data);
             });
     }
 
@@ -111,12 +119,16 @@ export class BackendService {
         );
     }
 
-    get chosCreationStats$() {
-        return this._chosCreationStats$.asObservable();
+    get chosCollectingStats$() {
+        return this._chosCollectingStats$.asObservable();
     }
 
-    get chosFoundStats$() {
-        return this._chosFoundStats$.asObservable();
+    get chosFindingStats$() {
+        return this._chosFindingStats$.asObservable();
+    }
+
+    get chosProductionStats$() {
+        return this._chosProductionStats$.asObservable();
     }
 
     get chosSummaries$() {

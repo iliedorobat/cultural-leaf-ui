@@ -56,38 +56,38 @@ export class CHOSummaryFilterComponent implements OnInit {
         this.form = new FormGroup({
             county: new FormControl,
             displayState: new FormControl(),
-            creationEndDate: new FormControl(this.filter.creationInterval?.end.date, [
-                this.timePeriodNumberValidator('creationEndDate'),
-                this.timePeriodValidator('creationEndDate', 'creationEndRange'),
-                this.timePeriodIntervalValidator('creationStartDate', 'creationEndDate')
+            collectingEndDate: new FormControl(this.filter.collectingInterval?.end.date, [
+                this.timePeriodNumberValidator('collectingEndDate'),
+                this.timePeriodValidator('collectingEndDate', 'collectingEndRange'),
+                this.timePeriodIntervalValidator('collectingStartDate', 'collectingEndDate')
             ]),
-            creationEndRange: new FormControl(this.filter.creationInterval?.end.range, [
-                this.timePeriodRangeValidator('creationStartRange', 'creationEndRange')
+            collectingEndRange: new FormControl(this.filter.collectingInterval?.end.range, [
+                this.timePeriodRangeValidator('collectingStartRange', 'collectingEndRange')
             ]),
-            creationStartDate: new FormControl(this.filter.creationInterval?.start.date, [
-                this.timePeriodNumberValidator('creationStartDate'),
-                this.timePeriodValidator('creationStartDate', 'creationStartRange'),
-                this.timePeriodIntervalValidator('creationStartDate', 'creationEndDate')
+            collectingStartDate: new FormControl(this.filter.collectingInterval?.start.date, [
+                this.timePeriodNumberValidator('collectingStartDate'),
+                this.timePeriodValidator('collectingStartDate', 'collectingStartRange'),
+                this.timePeriodIntervalValidator('collectingStartDate', 'collectingEndDate')
             ]),
-            creationStartRange: new FormControl(this.filter.creationInterval?.start.range, [
-                this.timePeriodRangeValidator('creationStartRange', 'creationEndRange')
+            collectingStartRange: new FormControl(this.filter.collectingInterval?.start.range, [
+                this.timePeriodRangeValidator('collectingStartRange', 'collectingEndRange')
             ]),
             epoch: new FormControl(),
-            foundEndDate: new FormControl(this.filter.foundInterval?.end.date, [
-                this.timePeriodNumberValidator('foundEndDate'),
-                this.timePeriodValidator('foundEndDate', 'foundEndRange'),
-                this.timePeriodIntervalValidator('foundStartDate', 'foundEndDate')
+            findingEndDate: new FormControl(this.filter.findingInterval?.end.date, [
+                this.timePeriodNumberValidator('findingEndDate'),
+                this.timePeriodValidator('findingEndDate', 'findingEndRange'),
+                this.timePeriodIntervalValidator('findingStartDate', 'findingEndDate')
             ]),
-            foundEndRange: new FormControl(this.filter.foundInterval?.end.range, [
-                this.timePeriodRangeValidator('foundStartRange', 'foundEndRange')
+            findingEndRange: new FormControl(this.filter.findingInterval?.end.range, [
+                this.timePeriodRangeValidator('findingStartRange', 'findingEndRange')
             ]),
-            foundStartDate: new FormControl(this.filter.foundInterval?.start.date, [
-                this.timePeriodNumberValidator('foundStartDate'),
-                this.timePeriodValidator('foundStartDate', 'foundStartRange'),
-                this.timePeriodIntervalValidator('foundStartDate', 'foundEndDate')
+            findingStartDate: new FormControl(this.filter.findingInterval?.start.date, [
+                this.timePeriodNumberValidator('findingStartDate'),
+                this.timePeriodValidator('findingStartDate', 'findingStartRange'),
+                this.timePeriodIntervalValidator('findingStartDate', 'findingEndDate')
             ]),
-            foundStartRange: new FormControl(this.filter.foundInterval?.start.range, [
-                this.timePeriodRangeValidator('foundStartRange', 'foundEndRange')
+            findingStartRange: new FormControl(this.filter.findingInterval?.start.range, [
+                this.timePeriodRangeValidator('findingStartRange', 'findingEndRange')
             ]),
             inventoryNumber: new FormControl(this.filter.inventoryNumber, [
                 Validators.minLength(3)
@@ -96,6 +96,22 @@ export class CHOSummaryFilterComponent implements OnInit {
             natureAge: new FormControl(),
             natureEpoch: new FormControl(),
             natureSex: new FormControl(),
+            productionEndDate: new FormControl(this.filter.productionInterval?.end.date, [
+                this.timePeriodNumberValidator('productionEndDate'),
+                this.timePeriodValidator('productionEndDate', 'productionEndRange'),
+                this.timePeriodIntervalValidator('productionStartDate', 'productionEndDate')
+            ]),
+            productionEndRange: new FormControl(this.filter.productionInterval?.end.range, [
+                this.timePeriodRangeValidator('productionStartRange', 'productionEndRange')
+            ]),
+            productionStartDate: new FormControl(this.filter.productionInterval?.start.date, [
+                this.timePeriodNumberValidator('productionStartDate'),
+                this.timePeriodValidator('productionStartDate', 'productionStartRange'),
+                this.timePeriodIntervalValidator('productionStartDate', 'productionEndDate')
+            ]),
+            productionStartRange: new FormControl(this.filter.productionInterval?.start.range, [
+                this.timePeriodRangeValidator('productionStartRange', 'productionEndRange')
+            ]),
             title: new FormControl(this.filter.title, [
                 Validators.minLength(3)
             ]),
@@ -224,11 +240,14 @@ export class CHOSummaryFilterComponent implements OnInit {
             case 'current-location':
                 this.filter.county = null;
                 break;
-            case 'creation-period':
-                this.filter.creationInterval = new FilterInterval();
+            case 'collecting-timespan':
+                this.filter.collectingInterval = new FilterInterval();
                 break;
-            case 'finding-period':
-                this.filter.foundInterval = new FilterInterval();
+            case 'finding-timespan':
+                this.filter.findingInterval = new FilterInterval();
+                break;
+            case 'production-timespan':
+                this.filter.productionInterval = new FilterInterval();
                 break;
             case 'medal-filter':
                 this.filter.medalFilter.shape = null;

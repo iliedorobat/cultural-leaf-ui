@@ -19,11 +19,11 @@ export class ChoStatsFilterComponent implements OnInit {
 
     ngOnInit(): void {
         this.form = new FormGroup({
+            collectingRange: new FormControl(this.filter.collectingTime.range),
             county: new FormControl,
-            creationRange: new FormControl(this.filter.creationTime.range),
             displayState: new FormControl(),
             epoch: new FormControl(),
-            foundRange: new FormControl(this.filter.foundTime.range),
+            findingRange: new FormControl(this.filter.findingTime.range),
             inventoryNumber: new FormControl(this.filter.inventoryNumber, [
                 Validators.minLength(3)
             ]),
@@ -31,6 +31,7 @@ export class ChoStatsFilterComponent implements OnInit {
             natureAge: new FormControl(),
             natureEpoch: new FormControl(),
             natureSex: new FormControl(),
+            productionRange: new FormControl(this.filter.productionTime.range),
             title: new FormControl(this.filter.title, [
                 Validators.minLength(3)
             ]),
@@ -62,11 +63,11 @@ export class ChoStatsFilterComponent implements OnInit {
             case 'current-location':
                 this.filter.county = null;
                 break;
-            case 'creation-period':
-                this.filter.creationTime = new CHOFilterTime();
+            case 'production-timespan':
+                this.filter.productionTime = new CHOFilterTime();
                 break;
-            case 'finding-period':
-                this.filter.foundTime = new CHOFilterTime();
+            case 'finding-timespan':
+                this.filter.findingTime = new CHOFilterTime();
                 break;
             case 'medal-filter':
                 this.filter.medalFilter.shape = null;

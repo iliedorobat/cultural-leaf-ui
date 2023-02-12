@@ -31,21 +31,23 @@
                     <lmap-locations-cho-filter [filter]="filter" [form]="form"></lmap-locations-cho-filter>
                 </ng-template>
             </ngb-panel>
+        </ngb-accordion>
 
-            <ngb-panel id="creation-period">
+        <ngb-accordion activeIds="timespans-filter">
+            <ngb-panel id="production-timespan">
                 <ng-template ngbPanelTitle>
-                    <div class="title">Creation Period (Interval)</div>
+                    <div class="title">Production Period (Interval)</div>
                     <button
                             class="btn btn-link btn-reset-section"
                             (click)="onSectionReset($event)"
                     >Reset</button>
                 </ng-template>
                 <ng-template ngbPanelContent>
-                    <lmap-events-cho-filter [filterInterval]="filter.creationInterval" [form]="form" formControlPrefix="creation"></lmap-events-cho-filter>
+                    <lmap-events-cho-filter [filterInterval]="filter.productionInterval" [form]="form" formControlPrefix="production"></lmap-events-cho-filter>
                 </ng-template>
             </ngb-panel>
 
-            <ngb-panel id="finding-period">
+            <ngb-panel id="finding-timespan">
                 <ng-template ngbPanelTitle>
                     <div class="title">Finding Period (Interval)</div>
                     <button
@@ -54,7 +56,20 @@
                     >Reset</button>
                 </ng-template>
                 <ng-template ngbPanelContent>
-                    <lmap-events-cho-filter [filterInterval]="filter.foundInterval" [form]="form" formControlPrefix="found"></lmap-events-cho-filter>
+                    <lmap-events-cho-filter [filterInterval]="filter.findingInterval" [form]="form" formControlPrefix="finding"></lmap-events-cho-filter>
+                </ng-template>
+            </ngb-panel>
+
+            <ngb-panel id="collecting-timespan">
+                <ng-template ngbPanelTitle>
+                    <div class="title">Collecting Period (Interval)</div>
+                    <button
+                            class="btn btn-link btn-reset-section"
+                            (click)="onSectionReset($event)"
+                    >Reset</button>
+                </ng-template>
+                <ng-template ngbPanelContent>
+                    <lmap-events-cho-filter [filterInterval]="filter.collectingInterval" [form]="form" formControlPrefix="collecting"></lmap-events-cho-filter>
                 </ng-template>
             </ngb-panel>
         </ngb-accordion>

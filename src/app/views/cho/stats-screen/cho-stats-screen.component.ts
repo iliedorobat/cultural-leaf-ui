@@ -22,37 +22,47 @@ export class CHOStatsScreenComponent implements OnInit {
     @Input() resetActiveButtonId: Function;
 
     filter: CHOStatsFilter = new CHOStatsFilter();
-    creationDataset: CHOEventStatsEntry[] = [];
-    foundDataset: CHOEventStatsEntry[] = [];
-    showCreationLabels: boolean = false;
-    showFoundLabels: boolean = false;
+    collectingDataset: CHOEventStatsEntry[] = [];
+    findingDataset: CHOEventStatsEntry[] = [];
+    productionDataset: CHOEventStatsEntry[] = [];
+    showCollectingLabels: boolean = false;
+    showFindingLabels: boolean = false;
+    showProductionLabels: boolean = false;
 
     ngOnInit(): void {
-        // TODO:
-        this.backendService.chosCreationStatsSubscription(this.filter, this.filter.creationTime.range);
-        this.backendService.chosFoundStatsSubscription(this.filter, this.filter.foundTime.range);
+        this.onFilterApply();
 
-        this.backendService.chosCreationStats$
+        this.backendService.chosProductionStats$
             .subscribe(stats => {
                 const entries = stats?.entries;
-                this.showCreationLabels = !!entries;
-                this.creationDataset = entries || [{name: 'Loading...', value: 100}];
+                this.showProductionLabels = !!entries;
+                this.productionDataset = entries || [{name: 'Loading...', value: 100}];
             });
 
-        this.backendService.chosFoundStats$
+        this.backendService.chosFindingStats$
             .subscribe(stats => {
                 const entries = stats?.entries;
-                this.showFoundLabels = !!entries;
-                this.foundDataset = entries || [{name: 'Loading...', value: 100}];
+                this.showFindingLabels = !!entries;
+                this.findingDataset = entries || [{name: 'Loading...', value: 100}];
+            });
+
+        this.backendService.chosCollectingStats$
+            .subscribe(stats => {
+                const entries = stats?.entries;
+                this.showCollectingLabels = !!entries;
+                this.collectingDataset = entries || [{name: 'Loading...', value: 100}];
             });
     }
 
     onFilterApply = () => {
-        if (this.filter.creationTime.show) {
-            this.backendService.chosCreationStatsSubscription(this.filter, this.filter.creationTime.range);
+        if (this.filter.productionTime.show) {
+            this.backendService.chosProductionStatsSubscription(this.filter, this.filter.productionTime.range);
         }
-        if (this.filter.foundTime.show) {
-            this.backendService.chosFoundStatsSubscription(this.filter, this.filter.foundTime.range);
+        if (this.filter.findingTime.show) {
+            this.backendService.chosFindingStatsSubscription(this.filter, this.filter.findingTime.range);
+        }
+        if (this.filter.collectingTime.show) {
+            this.backendService.chosCollectingStatsSubscription(this.filter, this.filter.collectingTime.range);
         }
     }
 

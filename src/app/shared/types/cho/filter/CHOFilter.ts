@@ -2,8 +2,9 @@ import {CHOBaseFilter} from './CHOBaseFilter';
 import {CHOFilterTime} from './CHOFilterTime';
 
 export class CHOFilter extends CHOBaseFilter {
-    public creationInterval: FilterInterval = new FilterInterval();
-    public foundInterval: FilterInterval = new FilterInterval();
+    public collectingInterval: FilterInterval = new FilterInterval();
+    public productionInterval: FilterInterval = new FilterInterval();
+    public findingInterval: FilterInterval = new FilterInterval();
 }
 
 export class FilterInterval {
