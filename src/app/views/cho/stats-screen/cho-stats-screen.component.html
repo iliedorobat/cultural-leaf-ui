@@ -12,16 +12,16 @@
 
     <div class="content">
         <lmap-cho-stats-pie-chart
+                title="Top 10 Creation Event Timespans"
                 *ngIf="filter.creationTime.show"
                 [dataset]="creationDataset"
-                title="Creation Events"
                 [showLabels]="showCreationLabels"
         ></lmap-cho-stats-pie-chart>
         <br />
         <lmap-cho-stats-pie-chart
+                title="Top 10 Finding Event Timespans"
                 *ngIf="filter.foundTime.show"
                 [dataset]="foundDataset"
-                title="Finding Events"
                 [showLabels]="showFoundLabels"
         ></lmap-cho-stats-pie-chart>
     </div>

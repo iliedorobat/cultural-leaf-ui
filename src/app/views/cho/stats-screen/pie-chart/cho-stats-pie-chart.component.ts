@@ -15,10 +15,14 @@ export class ChoStatsPieChartComponent {
     view: [number, number] = [800, 500];
 
     // options
-    @Input() colorScheme: Color = { // TODO:
-        domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
+    @Input() colors: Color = {
+        domain: [
+            '#913267', '#70B6C2', '#2596BE', '#6D88D2',
+            '#9B739C', '#7B8CB6', '#A0C6E8', '#39A1C2',
+            '#96AAC3', '#A04667', '#C6C7CA'
+        ]
     } as Color;
-    gradient: boolean = true;
+    @Input() gradient: boolean = true;
     isDoughnut: boolean = false;
     @Input() legendPosition: LegendPosition = 'right' as LegendPosition;
     @Input() showLabels: boolean = false;
