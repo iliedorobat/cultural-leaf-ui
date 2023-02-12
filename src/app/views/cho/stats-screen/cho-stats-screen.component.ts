@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {TranslateService} from '@ngx-translate/core';
 
@@ -18,8 +18,10 @@ export class CHOStatsScreenComponent implements OnInit {
         private backendService: BackendService,
         private translate: TranslateService
     ) {}
-    filter: CHOStatsFilter = new CHOStatsFilter();
 
+    @Input() resetActiveButtonId: Function;
+
+    filter: CHOStatsFilter = new CHOStatsFilter();
     creationDataset: CHOEventStatsEntry[] = [];
     foundDataset: CHOEventStatsEntry[] = [];
     showCreationLabels: boolean = false;
@@ -53,4 +55,9 @@ export class CHOStatsScreenComponent implements OnInit {
             this.backendService.chosFoundStatsSubscription(this.filter, this.filter.foundTime.range);
         }
     }
+
+    onViewClose = () => {
+        this.activeModal.close();
+        this.resetActiveButtonId();
+    };
 }

@@ -43,6 +43,7 @@ export class CHOSummaryScreenComponent implements OnInit {
 
     @ViewChildren(SortableHeader) headers: QueryList<SortableHeader>;
     @Input() filter: CHOFilter;
+    @Input() resetActiveButtonId: Function;
 
     ngOnInit(): void {
         this.onFilterApply();
@@ -76,4 +77,9 @@ export class CHOSummaryScreenComponent implements OnInit {
         this.tableService.sortColumn = column;
         this.tableService.sortDirection = direction;
     }
+
+    onViewClose = () => {
+        this.activeModal.close();
+        this.resetActiveButtonId();
+    };
 }

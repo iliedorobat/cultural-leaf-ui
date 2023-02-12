@@ -1,16 +1,13 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
-import {NgbOffcanvas, NgbOffcanvasOptions} from '@ng-bootstrap/ng-bootstrap';
+import {ChangeDetectorRef, Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Control, DomUtil, GeoJSON, Layer, Map} from 'leaflet';
 import {Observable, Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 
 import {AtlasService} from './atlas.service';
 import {BackendService} from '../../shared/services/backend.service';
-import {CHOFilter} from '../../shared/types/cho/filter/CHOFilter';
 import {EventsService} from './events.service';
 import {LayersService} from './layers.service';
 import {MuseumSummary} from '../../shared/types/museum/MuseumSummary';
-import {SidebarComponent} from '../sidebar/sidebar.component';
 
 import {COUNTIES} from 'src/app/shared/constants/geo.const';
 import {ENTITY_TYPE} from 'src/app/shared/constants/entity.enum';
@@ -29,8 +26,7 @@ export class AtlasComponent implements OnInit {
         private backendService: BackendService,
         private changeDetector: ChangeDetectorRef,
         private eventsService: EventsService,
-        private layersService: LayersService,
-        private offcanvasService: NgbOffcanvas
+        private layersService: LayersService
     ) {}
 
     MAP_OPTIONS = MAP_OPTIONS;
@@ -48,9 +44,10 @@ export class AtlasComponent implements OnInit {
             // GeoJSON: this.layerGeoJSON
         }
     };
-    atlasFilter: CHOFilter = new CHOFilter();
     // private modalPayload: ModalPayload = new ModalPayload(null, {});
     // private modalPayload$: Observable<ModalPayload> = this.eventsService.payload$.pipe(takeUntil(this.destroying$));
+
+    @Output() openSidebar = new EventEmitter();
 
     ngOnInit(): void {
         // this.modalPayload$
@@ -97,16 +94,7 @@ export class AtlasComponent implements OnInit {
     }
 
     onOpenSidebar(event: Event) {
-        event.preventDefault();
-        event.stopPropagation();
-
-        // const options = {
-        //     panelClass: 'atlas-filter',
-        //     scroll: true
-        // } as NgbOffcanvasOptions;
-        const offcanvasRef = this.offcanvasService.open(SidebarComponent);
-        offcanvasRef.componentInstance.filter = this.atlasFilter;
-        offcanvasRef.componentInstance.name = 'Atlas Filter';
+        this.openSidebar.emit(event);
     }
 
     // ngOnDestroy(): void {

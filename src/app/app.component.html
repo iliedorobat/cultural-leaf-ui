@@ -1,3 +1,30 @@
-<lmap-atlas></lmap-atlas>
+<div id="header">
+    <button
+            id="filter-button"
+            type="button"
+            [ngClass]="{'btn btn-light': true, 'active': activeButtonId === 'filter-button'}"
+            (click)="onOpenSidebar($event, 'filter-button')"
+    >Filter</button>
+    <button
+            id="chos-summaries-button"
+            type="button"
+            [ngClass]="{'btn btn-light': true, 'active': activeButtonId === 'chos-summaries-button'}"
+            (click)="onOpenCHOsSummaries($event, 'chos-summaries-button')"
+    >CHOs Summaries</button>
+    <button
+            id="chos-status-button"
+            type="button"
+            [ngClass]="{'btn btn-light': true, 'active': activeButtonId === 'chos-status-button'}"
+            (click)="onOpenCHOsStats($event, 'chos-status-button')"
+    >Events Stats</button>
+    <button
+            id="map-button"
+            type="button"
+            [ngClass]="{'btn btn-light': true, 'active': activeButtonId === 'map-button'}"
+            (click)="updateActiveButtonId('map-button')"
+    >Map</button>
+</div>
+
+<lmap-atlas (openSidebar)="onOpenSidebar($event, 'filter-button')"></lmap-atlas>
 
 <router-outlet></router-outlet>

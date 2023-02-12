@@ -14,4 +14,10 @@ export class SidebarComponent {
     ) {}
 
     @Input() filter: CHOFilter;
+    @Input() resetActiveButtonId: Function;
+
+    onSidebarClose = () => {
+        this.activeOffcanvas.dismiss('Cross click');
+        this.resetActiveButtonId();
+    };
 }

@@ -257,9 +257,4 @@ export class CHOSummaryFilterComponent implements OnInit {
                 this.tableService.rawData = summaries;
             });
     }
-
-    // TODO:
-    openCHOsStats = () => {
-        const modalRef = this.modalService.open(CHOStatsScreenComponent, {fullscreen: true});
-    }
 }
