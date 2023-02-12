@@ -4,11 +4,15 @@ import {Injectable} from '@angular/core';
 
 import {MuseumDetails} from '../types/museum/MuseumDetails';
 import {MuseumSummary} from '../types/museum/MuseumSummary';
-import {CHO_ENDPOINT, HTTP_OPTIONS, MUSEUM_ENDPOINT} from './backend.const';
+import {CHO_ENDPOINT, CHO_STATS_ENDPOINT, HTTP_OPTIONS, MUSEUM_ENDPOINT} from './backend.const';
 import {CHOFilter} from '../types/cho/CHOFilter';
+import {CHOStatsFilter} from '../types/cho/CHOStatsFilter';
 import {CHOSummary} from '../types/cho/CHOSummary';
 import {Counter} from '../types/Counter';
 import {CHODetails} from '../types/cho/CHODetails';
+
+import {DATE_RANGES} from '../types/cho/filter.const';
+import {EVENT_TYPE} from '../constants/entity.enum';
 
 @Injectable({
     providedIn: 'root'
@@ -24,6 +28,10 @@ export class BackendService {
     // private _museumDetails$: BehaviorSubject<Museum> = new BehaviorSubject<Museum>({} as Museum);
     private _choCount$: BehaviorSubject<Counter> = new BehaviorSubject<Counter>({count: 0} as Counter);
     private _choDetails$: BehaviorSubject<CHODetails> = new BehaviorSubject<CHODetails>({} as CHODetails);
+    // TODO:
+    private _chosCreationStats$: BehaviorSubject<any> = new BehaviorSubject<any>({});
+    // TODO:
+    private _chosFoundStats$: BehaviorSubject<any> = new BehaviorSubject<any>({});
     private _chosSummaries$: BehaviorSubject<CHOSummary[]> = new BehaviorSubject<CHOSummary[]>([]);
 
     public retrieveChoCounter(payload: CHOFilter | null): Observable<Counter> {
@@ -32,6 +40,10 @@ export class BackendService {
 
     public getCHODetails(uri: string): Observable<CHODetails> {
         return this.http.get<CHODetails>(`${CHO_ENDPOINT}?uri=${uri}`, HTTP_OPTIONS);
+    }
+    public getCHOsStats(payload: CHOStatsFilter, eventType: EVENT_TYPE, timespanType: DATE_RANGES | null): Observable<Counter> {
+        // TODO: <any>
+        return this.http.post<any>(CHO_STATS_ENDPOINT + `?eventType=${eventType}&timespanType=${timespanType}`, payload, HTTP_OPTIONS);
     }
 
     public getCHOsSummaries(payload: CHOFilter): Observable<CHOSummary[]> {
@@ -74,6 +86,20 @@ export class BackendService {
             });
     }
 
+    public chosCreationStatsSubscription(payload: CHOStatsFilter, timespanType: DATE_RANGES | null) {
+        this.getCHOsStats(payload, EVENT_TYPE.PRODUCTION, (timespanType || DATE_RANGES.CENTURY))
+            .subscribe((data: any) => {
+                this._chosCreationStats$.next(data);
+            });
+    }
+
+    public chosFoundStatsSubscription(payload: CHOStatsFilter, timespanType: DATE_RANGES | null) {
+        this.getCHOsStats(payload, EVENT_TYPE.FINDING, (timespanType || DATE_RANGES.CENTURY))
+            .subscribe((data: any) => {
+                this._chosFoundStats$.next(data);
+            });
+    }
+
     public chosSummariesSubscription(payload: CHOFilter | any) {
         this.getCHOsSummaries(payload)
             .subscribe((data: CHOSummary[]) => {
@@ -85,6 +111,14 @@ export class BackendService {
         return this._choCount$.asObservable().pipe(
             map(item => item.count)
         );
+    }
+
+    get chosCreationStats$() {
+        return this._chosCreationStats$.asObservable();
+    }
+
+    get chosFoundStats$() {
+        return this._chosFoundStats$.asObservable();
     }
 
     get chosSummaries$() {

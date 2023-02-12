@@ -1,14 +1,16 @@
 import {Component, Input} from '@angular/core';
 import {FormGroup} from '@angular/forms';
 
-import {CHOFilter, NATURE_AGES, NATURE_EPOCHS, NATURE_SEXES} from '../../../../shared/types/cho/CHOFilter';
+import {CHOFilter} from '../../../../shared/types/cho/CHOFilter';
+import {CHOStatsFilter} from '../../../../shared/types/cho/CHOStatsFilter';
+import {NATURE_AGES, NATURE_EPOCHS, NATURE_SEXES} from '../../../../shared/types/cho/filter.const';
 
 @Component({
     selector: 'lmap-natural-science-cho-filter',
     templateUrl: './natural-science-cho-filter.component.html'
 })
 export class NaturalScienceChoFilterComponent {
-    @Input() filter: CHOFilter;
+    @Input() filter: CHOFilter | CHOStatsFilter;
     @Input() form: FormGroup;
 
     NATURE_AGES = Object.values(NATURE_AGES);

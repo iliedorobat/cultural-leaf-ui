@@ -1,0 +1,16 @@
+.stats-pie-chart {
+    display: flex;
+    justify-content: center;
+
+    ::ng-deep {
+        .chart-legend {
+            .legend-title {
+                width: 140px;
+            }
+
+            .legend-wrap {
+                width: 150px;
+            }
+        }
+    }
+}

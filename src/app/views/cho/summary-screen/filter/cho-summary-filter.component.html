@@ -3,6 +3,9 @@
     <button [ngClass]="{'btn btn-counter': true, disabled: !counterClickable}" (click)="openCHOsModal()">
         Results: {{ totalCHOs$ | async | number }} CHOs
     </button>
+    <button class="btn btn-warning" (click)="openCHOsStats()">
+        Open Stats
+    </button>
 
     <form class="needs-validation" [formGroup]="form">
         <ngb-accordion activeIds="general-info-filter">

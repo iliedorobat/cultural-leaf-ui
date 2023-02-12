@@ -1,0 +1,23 @@
+<div [formGroup]="form">
+    <div class="row">
+        <div class="col-md-8 mb-3">
+            <label>Range</label>
+            <select
+                    class="form-select form-select-sm"
+                    id="startRange"
+                    [formControlName]="formControlPrefix + 'Range'"
+                    [(ngModel)]="filterRange.range"
+            >
+                <option [ngValue]="null" selected disabled>Select the range</option>
+                <option *ngFor="let range of DATE_RANGES" [ngValue]="range">{{ range }}</option>
+            </select>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <label>Show</label>
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" [checked]="filterRange.show" (change)="onCheckChanges()" />
+            </div>
+        </div>
+    </div>
+</div>

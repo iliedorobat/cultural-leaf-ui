@@ -11,18 +11,19 @@ import {
     ValidatorFn,
     Validators
 } from '@angular/forms';
-import {CHOSummaryScreenComponent} from '../summary-screen/cho-summary-screen.component';
-import {BackendService} from '../../../shared/services/backend.service';
-import {TableService} from '../../../shared/components/table/table.service';
+import {CHOSummaryScreenComponent} from '../cho-summary-screen.component';
+import {BackendService} from '../../../../shared/services/backend.service';
+import {TableService} from '../../../../shared/components/table/table.service';
 
-import {CHO_DISPLAY_STATES, CHO_TYPES, CHOFilter, FilterInterval} from '../../../shared/types/cho/CHOFilter';
+import {CHOFilter, FilterInterval} from '../../../../shared/types/cho/CHOFilter';
+import {CHOStatsScreenComponent} from '../../stats-screen/cho-stats-screen.component';
 
 @Component({
-    selector: 'lmap-cho-filter',
-    templateUrl: './cho-filter.component.html',
-    styleUrls: ['./cho-filter.component.scss']
+    selector: 'lmap-cho-summary-filter',
+    templateUrl: './cho-summary-filter.component.html',
+    styleUrls: ['../../filter/filter.scss']
 })
-export class CHOFilterComponent implements OnInit {
+export class CHOSummaryFilterComponent implements OnInit {
     totalCHOs$: Observable<number>;
     counterClickable = true;
 
@@ -209,11 +210,6 @@ export class CHOFilterComponent implements OnInit {
 
     // TODO: form control validation: https://github.com/loiane/angular-reactive-forms-validate-submit/blob/97a7e9ebd834b0913c15a0fc27fe19b2ffe9a05d/src/app/validate-fields-submit-form/validate-fields-submit-form.component.ts#L54
     onSubmit() {
-        // this.filter.prepareBackendData();
-        const filter = new CHOFilter();
-        filter.displayState = CHO_DISPLAY_STATES.MEDIOCRE;
-        filter.type = CHO_TYPES.BIOLOGICAL_OBJECT;
-
         this.backendService.museumsSummariesSubscription(this.filter);
         this.backendService.choCounterSubscription(this.filter);
 
@@ -267,5 +263,10 @@ export class CHOFilterComponent implements OnInit {
             .subscribe(summaries => {
                 this.tableService.rawData = summaries;
             });
+    }
+
+    // TODO:
+    openCHOsStats = () => {
+        const modalRef = this.modalService.open(CHOStatsScreenComponent, {fullscreen: true});
     }
 }

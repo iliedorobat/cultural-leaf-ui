@@ -14,7 +14,10 @@ import {StrService} from './shared/services/str.service';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {AtlasComponent} from './views/atlas/atlas.component';
-import {CHOFilterComponent} from './views/cho/filter/cho-filter.component';
+import {ChoStatsFilterComponent} from './views/cho/stats-screen/filter/cho-stats-filter.component';
+import {ChoStatsPieChartComponent} from './views/cho/stats-screen/pie-chart/cho-stats-pie-chart.component';
+import {CHOStatsScreenComponent} from './views/cho/stats-screen/cho-stats-screen.component';
+import {CHOSummaryFilterComponent} from './views/cho/summary-screen/filter/cho-summary-filter.component';
 import {CHOSummaryScreenComponent} from './views/cho/summary-screen/cho-summary-screen.component';
 import {DecimalPipe} from '@angular/common';
 import {DetailsScreenComponent} from './shared/screens/details-screen/details-screen.component';
@@ -24,8 +27,10 @@ import {
     DetailsScreenSectionTitlePipe,
     DetailsScreenSectionValuePipe
 } from './shared/screens/details-screen/details-screen.pipe';
+import {EventsChoStatsFilterComponent} from './views/cho/stats-screen/filter/events/events-cho-stats-filter.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HorizontalLineComponent} from './shared/components/horizontal-line/horizontal-line';
+import {NgxChartsModule} from '@swimlane/ngx-charts';
 import {SectionPaneComponent} from './shared/components/panes/section-pane/section-pane.component';
 import {SidebarComponent} from './views/sidebar/sidebar.component';
 import {EventsChoFilterComponent} from './views/cho/filter/events/events-cho-filter.component';
@@ -45,13 +50,17 @@ export function HttpLoaderFactory(http: HttpClient) {
     declarations: [
         AppComponent,
         AtlasComponent,
-        CHOFilterComponent,
+        ChoStatsFilterComponent,
+        ChoStatsPieChartComponent,
+        CHOStatsScreenComponent,
+        CHOSummaryFilterComponent,
         CHOSummaryScreenComponent,
         DetailsScreenComponent,
         DetailsScreenSectionPipe,
         DetailsScreenSectionSubtitlePipe,
         DetailsScreenSectionTitlePipe,
         DetailsScreenSectionValuePipe,
+        EventsChoStatsFilterComponent,
         HorizontalLineComponent,
         SectionPaneComponent,
         SidebarComponent,
@@ -83,6 +92,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         AppRoutingModule,
         LeafletModule,
         NgbModule,
+        NgxChartsModule,
         FormsModule,
         ReactiveFormsModule,
         SortableHeader
