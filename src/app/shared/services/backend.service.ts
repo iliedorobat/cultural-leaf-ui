@@ -22,7 +22,7 @@ export class BackendService {
     constructor(private http: HttpClient) {
         // this.museumsSummariesSubscription(); // get the list of all museums
         this.museumsSummariesSubscription(new CHOFilter()); // get the list of museums which hosts CHOs
-        this.choCounterSubscription(null);
+        this.choCounterSubscription(new CHOFilter()); // get the list of total number of CHOs
     }
 
     public _museumsSummaries$: BehaviorSubject<MuseumSummary[]> = new BehaviorSubject<MuseumSummary[]>([]);
@@ -57,7 +57,7 @@ export class BackendService {
         return this.http.post<MuseumSummary[]>(MUSEUM_ENDPOINT, payload, HTTP_OPTIONS);
     }
 
-    public choCounterSubscription(payload: CHOFilter | null) {
+    public choCounterSubscription(payload: CHOFilter) {
         this.retrieveChoCounter(payload)
             .subscribe((data: Counter) => {
                 this._choCount$.next(data);

@@ -74,12 +74,12 @@
             <!--                </ng-template>-->
             <!--            </ngb-panel>-->
 
-            <ngb-panel id="medal-filter" [disabled]="isNatureFilterTouched(filter.natureFilter)">
+            <ngb-panel id="medal-filter" [disabled]="!filter.natureFilter.isEmpty()">
                 <ng-template ngbPanelTitle>
                     <div class="title">Medal Filter</div>
                     <button
                             class="btn btn-link btn-reset-section"
-                            [disabled]="isNatureFilterTouched(filter.natureFilter)"
+                            [disabled]="!filter.natureFilter.isEmpty()"
                             (click)="onSectionReset($event)"
                     >Reset</button>
                 </ng-template>
@@ -88,12 +88,12 @@
                 </ng-template>
             </ngb-panel>
 
-            <ngb-panel id="natural-science-filter" [disabled]="isMedalFilterTouched(filter.medalFilter)">
+            <ngb-panel id="natural-science-filter" [disabled]="!filter.medalFilter.isEmpty()">
                 <ng-template ngbPanelTitle>
                     <div class="title">Natural Science Filter</div>
                     <button
                             class="btn btn-link btn-reset-section"
-                            [disabled]="isMedalFilterTouched(filter.medalFilter)"
+                            [disabled]="!filter.medalFilter.isEmpty()"
                             (click)="onSectionReset($event)"
                     >Reset</button>
                 </ng-template>

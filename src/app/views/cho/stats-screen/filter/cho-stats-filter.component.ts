@@ -4,7 +4,6 @@ import * as _ from 'lodash';
 
 import {CHOFilterTime} from '../../../../shared/types/cho/filter/CHOFilterTime';
 import {CHOStatsFilter} from '../../../../shared/types/cho/stats/CHOStatsFilter';
-import {FilterUtils} from './filter.utils';
 
 @Component({
     selector: 'lmap-cho-stats-filter',
@@ -38,10 +37,6 @@ export class ChoStatsFilterComponent implements OnInit {
             type: new FormControl()
         });
     }
-
-    isMedalFilterTouched = FilterUtils.isMedalFilterTouched;
-
-    isNatureFilterTouched = FilterUtils.isNatureFilterTouched;
 
     onSubmit() {
         this.onFilterApply && this.onFilterApply();

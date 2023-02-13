@@ -52,7 +52,7 @@ export class CHOSummaryScreenComponent implements OnInit {
     onFilterApply = () => {
         this.tableService.page = 1;
         this.backendService.chosSummariesSubscription(this.filter);
-    }
+    };
 
     onRowClick(summary: CHOSummary) {
         this.backendService.getCHODetails(summary.uri)

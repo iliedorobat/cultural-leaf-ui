@@ -34,11 +34,12 @@
         </ngb-accordion>
 
         <ngb-accordion activeIds="timespans-filter">
-            <ngb-panel id="production-timespan">
+            <ngb-panel id="production-timespan" [disabled]="!this.filter.collectingInterval.isEmpty() || !this.filter.findingInterval.isEmpty()">
                 <ng-template ngbPanelTitle>
                     <div class="title">Production Period (Interval)</div>
                     <button
                             class="btn btn-link btn-reset-section"
+                            [disabled]="!this.filter.collectingInterval.isEmpty() || !this.filter.findingInterval.isEmpty()"
                             (click)="onSectionReset($event)"
                     >Reset</button>
                 </ng-template>
@@ -47,11 +48,12 @@
                 </ng-template>
             </ngb-panel>
 
-            <ngb-panel id="finding-timespan">
+            <ngb-panel id="finding-timespan" [disabled]="!this.filter.collectingInterval.isEmpty() || !this.filter.productionInterval.isEmpty()">
                 <ng-template ngbPanelTitle>
                     <div class="title">Finding Period (Interval)</div>
                     <button
                             class="btn btn-link btn-reset-section"
+                            [disabled]="!this.filter.collectingInterval.isEmpty() || !this.filter.productionInterval.isEmpty()"
                             (click)="onSectionReset($event)"
                     >Reset</button>
                 </ng-template>
@@ -60,11 +62,12 @@
                 </ng-template>
             </ngb-panel>
 
-            <ngb-panel id="collecting-timespan">
+            <ngb-panel id="collecting-timespan" [disabled]="!this.filter.findingInterval.isEmpty() || !this.filter.productionInterval.isEmpty()">
                 <ng-template ngbPanelTitle>
                     <div class="title">Collecting Period (Interval)</div>
                     <button
                             class="btn btn-link btn-reset-section"
+                            [disabled]="!this.filter.findingInterval.isEmpty() || !this.filter.productionInterval.isEmpty()"
                             (click)="onSectionReset($event)"
                     >Reset</button>
                 </ng-template>
@@ -81,12 +84,12 @@
             <!--                </ng-template>-->
             <!--            </ngb-panel>-->
 
-            <ngb-panel id="medal-filter" [disabled]="isNatureFilterTouched(filter.natureFilter)">
+            <ngb-panel id="medal-filter" [disabled]="!filter.natureFilter.isEmpty()">
                 <ng-template ngbPanelTitle>
                     <div class="title">Medal Filter</div>
                     <button
                             class="btn btn-link btn-reset-section"
-                            [disabled]="isNatureFilterTouched(filter.natureFilter)"
+                            [disabled]="!filter.natureFilter.isEmpty()"
                             (click)="onSectionReset($event)"
                     >Reset</button>
                 </ng-template>
@@ -95,12 +98,12 @@
                 </ng-template>
             </ngb-panel>
 
-            <ngb-panel id="natural-science-filter" [disabled]="isMedalFilterTouched(filter.medalFilter)">
+            <ngb-panel id="natural-science-filter" [disabled]="!filter.medalFilter.isEmpty()">
                 <ng-template ngbPanelTitle>
                     <div class="title">Natural Science Filter</div>
                     <button
                             class="btn btn-link btn-reset-section"
-                            [disabled]="isMedalFilterTouched(filter.medalFilter)"
+                            [disabled]="!filter.medalFilter.isEmpty()"
                             (click)="onSectionReset($event)"
                     >Reset</button>
                 </ng-template>

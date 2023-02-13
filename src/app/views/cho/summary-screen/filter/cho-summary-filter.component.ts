@@ -15,7 +15,6 @@ import {
 import {BackendService} from '../../../../shared/services/backend.service';
 import {CHOFilter, FilterInterval} from '../../../../shared/types/cho/filter/CHOFilter';
 import {CHOSummaryScreenComponent} from '../cho-summary-screen.component';
-import {FilterUtils} from '../../stats-screen/filter/filter.utils';
 import {TableService} from '../../../../shared/components/table/table.service';
 
 @Component({
@@ -212,10 +211,6 @@ export class CHOSummaryFilterComponent implements OnInit {
             return null;
         }
     };
-
-    isMedalFilterTouched = FilterUtils.isMedalFilterTouched;
-
-    isNatureFilterTouched = FilterUtils.isNatureFilterTouched;
 
     // TODO: form control validation: https://github.com/loiane/angular-reactive-forms-validate-submit/blob/97a7e9ebd834b0913c15a0fc27fe19b2ffe9a05d/src/app/validate-fields-submit-form/validate-fields-submit-form.component.ts#L54
     onSubmit() {
