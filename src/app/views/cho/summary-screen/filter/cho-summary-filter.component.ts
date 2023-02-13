@@ -15,7 +15,6 @@ import {
 import {BackendService} from '../../../../shared/services/backend.service';
 import {CHOFilter, FilterInterval} from '../../../../shared/types/cho/filter/CHOFilter';
 import {CHOSummaryScreenComponent} from '../cho-summary-screen.component';
-import {CHOStatsScreenComponent} from '../../stats-screen/cho-stats-screen.component';
 import {FilterUtils} from '../../stats-screen/filter/filter.utils';
 import {TableService} from '../../../../shared/components/table/table.service';
 
@@ -49,6 +48,7 @@ export class CHOSummaryFilterComponent implements OnInit {
 
     @Input() filter: CHOFilter;
     @Input() onFilterApply: Function;
+    @Input() resetActiveButtonId: Function;
 
     form: FormGroup;
 
@@ -269,6 +269,7 @@ export class CHOSummaryFilterComponent implements OnInit {
 
         const modalRef = this.modalService.open(CHOSummaryScreenComponent, {fullscreen: true});
         modalRef.componentInstance.filter = this.filter;
+        modalRef.componentInstance.resetActiveButtonId = this.resetActiveButtonId;
         this.activeOffcanvas.close();
 
         this.backendService.chosSummaries$
