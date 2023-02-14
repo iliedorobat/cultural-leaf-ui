@@ -15,6 +15,7 @@ import {
 import {BackendService} from '../../../../shared/services/backend.service';
 import {CHOFilter, FilterInterval} from '../../../../shared/types/cho/filter/CHOFilter';
 import {CHOSummaryScreenComponent} from '../cho-summary-screen.component';
+import {MuseumService} from '../../../../shared/services/museum.service';
 import {TableService} from '../../../../shared/components/table/table.service';
 
 @Component({
@@ -30,6 +31,7 @@ export class CHOSummaryFilterComponent implements OnInit {
         public activeOffcanvas: NgbActiveOffcanvas,
         private backendService: BackendService,
         private modalService: NgbModal,
+        private museumService: MuseumService,
         public tableService: TableService
     ) {
         this.totalCHOs$ = backendService.totalCHOs$;
@@ -212,8 +214,14 @@ export class CHOSummaryFilterComponent implements OnInit {
         }
     };
 
+    onReset() {
+        this.form.reset();
+        this.museumService.reset();
+    }
+
     // TODO: form control validation: https://github.com/loiane/angular-reactive-forms-validate-submit/blob/97a7e9ebd834b0913c15a0fc27fe19b2ffe9a05d/src/app/validate-fields-submit-form/validate-fields-submit-form.component.ts#L54
     onSubmit() {
+        this.museumService.apply();
         this.backendService.museumsSummariesSubscription(this.filter);
         this.backendService.choCounterSubscription(this.filter);
 

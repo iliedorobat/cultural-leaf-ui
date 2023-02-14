@@ -2,6 +2,7 @@ import {Component, Input} from '@angular/core';
 import {NgbActiveOffcanvas} from '@ng-bootstrap/ng-bootstrap';
 
 import {CHOFilter} from '../../shared/types/cho/filter/CHOFilter';
+import {MuseumService} from '../../shared/services/museum.service';
 
 @Component({
     selector: 'lmap-sidebar',
@@ -10,8 +11,11 @@ import {CHOFilter} from '../../shared/types/cho/filter/CHOFilter';
 })
 export class SidebarComponent {
     constructor(
-        public activeOffcanvas: NgbActiveOffcanvas
-    ) {}
+        public activeOffcanvas: NgbActiveOffcanvas,
+        private museumService: MuseumService
+    ) {
+        this.museumService.setIsShowAllVisible(true);
+    }
 
     @Input() filter: CHOFilter;
     @Input() resetActiveButtonId: Function;

@@ -8,6 +8,7 @@ import {CHODetails} from '../../../shared/types/cho/CHODetails';
 import {CHOFilter} from '../../../shared/types/cho/filter/CHOFilter';
 import {CHOSummary} from '../../../shared/types/cho/CHOSummary';
 import {DetailsScreenComponent} from '../../../shared/screens/details-screen/details-screen.component';
+import {MuseumService} from '../../../shared/services/museum.service';
 import {SortableHeader, SortEvent} from '../../../shared/components/table/sortable.directive';
 import {TableService} from '../../../shared/components/table/table.service';
 
@@ -29,9 +30,12 @@ export class CHOSummaryScreenComponent implements OnInit {
         public activeModal: NgbActiveModal,
         private backendService: BackendService,
         private modalService: NgbModal,
+        private museumService: MuseumService,
         public tableService: TableService,
         private translate: TranslateService
     ) {
+        this.museumService.setIsShowAllVisible(false);
+
         this.data$ = tableService.data$;
         this.total$ = tableService.total$;
 

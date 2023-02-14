@@ -31,7 +31,7 @@
     </div>
 
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-6 mb-3">
             <select
                     class="form-select form-select-sm"
                     id="displayState"
@@ -53,6 +53,15 @@
                 <option [ngValue]="null" selected disabled>Type of CHOs</option>
                 <option *ngFor="let choType of CHO_TYPES" [ngValue]="choType">{{ choType }}</option>
             </select>
+        </div>
+    </div>
+
+    <div class="row" *ngIf="museumService.isShowAllVisible">
+        <div class="col-md-6">
+            <label>Show all Museums</label>
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" [checked]="museumService.showAll" (change)="museumService.toggleShowAll()" />
+            </div>
         </div>
     </div>
 </div>

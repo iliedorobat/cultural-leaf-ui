@@ -2,14 +2,15 @@ import {BehaviorSubject, map, Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 
-import {MuseumDetails} from '../types/museum/MuseumDetails';
-import {MuseumSummary} from '../types/museum/MuseumSummary';
 import {CHOEventStats} from '../types/cho/stats/CHOEventStats';
 import {CHOFilter} from '../types/cho/filter/CHOFilter';
 import {CHOStatsFilter} from '../types/cho/stats/CHOStatsFilter';
 import {CHOSummary} from '../types/cho/CHOSummary';
 import {Counter} from '../types/Counter';
 import {CHODetails} from '../types/cho/CHODetails';
+import {MuseumDetails} from '../types/museum/MuseumDetails';
+import {MuseumSummary} from '../types/museum/MuseumSummary';
+import {MuseumService} from './museum.service';
 
 import {CHO_ENDPOINT, CHO_STATS_ENDPOINT, HTTP_OPTIONS, MUSEUM_ENDPOINT} from './backend.const';
 import {DATE_RANGES} from '../constants/filter.enum';
@@ -19,7 +20,10 @@ import {EVENT_TYPE} from '../constants/entity.enum';
     providedIn: 'root'
 })
 export class BackendService {
-    constructor(private http: HttpClient) {
+    constructor(
+        private http: HttpClient,
+        private museumService: MuseumService
+    ) {
         // this.museumsSummariesSubscription(); // get the list of all museums
         this.museumsSummariesSubscription(new CHOFilter()); // get the list of museums which hosts CHOs
         this.choCounterSubscription(new CHOFilter()); // get the list of total number of CHOs
@@ -72,7 +76,14 @@ export class BackendService {
     // }
 
     public museumsSummariesSubscription(payload: CHOFilter | any) {
-        this.getMuseumsSummaries(payload)
+        let choFilter = payload;
+
+        // Show all museums regardless of the selected filter
+        if (this.museumService.isShowAllVisible && this.museumService.showAll) {
+            choFilter = null;
+        }
+
+        this.getMuseumsSummaries(choFilter)
             .subscribe((data: MuseumSummary[]) => {
                 this._museumsSummaries$.next(data);
             });

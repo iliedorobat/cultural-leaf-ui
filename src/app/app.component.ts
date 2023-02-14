@@ -65,7 +65,7 @@ export class AppComponent {
         // } as NgbOffcanvasOptions;
         const offcanvasRef = this.offcanvasService.open(SidebarComponent);
         offcanvasRef.componentInstance.filter = this.atlasFilter;
-        offcanvasRef.componentInstance.name = 'Atlas Filter';
+        offcanvasRef.componentInstance.name = 'Cultural Leaf Filter';
         offcanvasRef.componentInstance.resetActiveButtonId = this.resetActiveButtonId;
         offcanvasRef.hidden.subscribe(value => {
             this.resetActiveButtonId();

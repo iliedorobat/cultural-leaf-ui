@@ -30,6 +30,7 @@ import {
 import {EventsChoStatsFilterComponent} from './views/cho/stats-screen/filter/events/events-cho-stats-filter.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HorizontalLineComponent} from './shared/components/horizontal-line/horizontal-line';
+import {MuseumService} from './shared/services/museum.service';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 import {SectionPaneComponent} from './shared/components/panes/section-pane/section-pane.component';
 import {SidebarComponent} from './views/sidebar/sidebar.component';
@@ -102,6 +103,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         AtlasService,
         DecimalPipe,
         HttpService,
+        MuseumService,
         NgbActiveOffcanvas,
         StrService
     ],

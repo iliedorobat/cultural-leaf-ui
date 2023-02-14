@@ -4,6 +4,7 @@ import * as _ from 'lodash';
 
 import {CHOFilterTime} from '../../../../shared/types/cho/filter/CHOFilterTime';
 import {CHOStatsFilter} from '../../../../shared/types/cho/stats/CHOStatsFilter';
+import {MuseumService} from '../../../../shared/services/museum.service';
 
 @Component({
     selector: 'lmap-cho-stats-filter',
@@ -11,6 +12,10 @@ import {CHOStatsFilter} from '../../../../shared/types/cho/stats/CHOStatsFilter'
     styleUrls: ['../../filter/filter.scss']
 })
 export class ChoStatsFilterComponent implements OnInit {
+    constructor(private museumService: MuseumService) {
+        this.museumService.setIsShowAllVisible(false);
+    }
+
     @Input() filter: CHOStatsFilter;
     @Input() onFilterApply: Function;
 

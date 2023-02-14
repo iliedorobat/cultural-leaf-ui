@@ -3,6 +3,8 @@ import {FormGroup} from '@angular/forms';
 
 import {CHOFilter} from '../../../../shared/types/cho/filter/CHOFilter';
 import {CHOStatsFilter} from '../../../../shared/types/cho/stats/CHOStatsFilter';
+import {MuseumService} from '../../../../shared/services/museum.service';
+
 import {CHO_DISPLAY_STATES, CHO_TYPES} from '../../../../shared/constants/filter.enum';
 
 @Component({
@@ -10,6 +12,8 @@ import {CHO_DISPLAY_STATES, CHO_TYPES} from '../../../../shared/constants/filter
     templateUrl: './general-info-cho-filter.component.html'
 })
 export class GeneralInfoChoFilterComponent {
+    constructor(public museumService: MuseumService) {}
+
     @Input() filter: CHOFilter | CHOStatsFilter;
     @Input() form: FormGroup;
 
