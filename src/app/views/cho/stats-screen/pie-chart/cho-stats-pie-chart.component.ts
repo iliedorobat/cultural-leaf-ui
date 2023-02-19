@@ -1,8 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {LegendPosition} from '@swimlane/ngx-charts';
 import {Color} from '@swimlane/ngx-charts/lib/utils/color-sets';
-
-import {CHOEventStatsEntry} from '../../../../shared/types/cho/stats/CHOEventStats';
+import {DataItem} from '@swimlane/ngx-charts/lib/models/chart-data.model';
 
 @Component({
     selector: 'lmap-cho-stats-pie-chart',
@@ -10,9 +9,9 @@ import {CHOEventStatsEntry} from '../../../../shared/types/cho/stats/CHOEventSta
     styleUrls: ['./cho-stats-pie-chart.component.scss'],
 })
 export class ChoStatsPieChartComponent {
-    @Input() dataset: CHOEventStatsEntry[] = [];
+    @Input() dataset: DataItem[] = [];
     @Input() title: string;
-    view: [number, number] = [800, 500];
+    view: [number, number] = [900, 500];
 
     // options
     @Input() colors: Color = {
@@ -27,6 +26,25 @@ export class ChoStatsPieChartComponent {
     @Input() legendPosition: LegendPosition = 'right' as LegendPosition;
     @Input() showLabels: boolean = false;
     @Input() showLegend: boolean = true;
+
+    formatPercent = (dataItem: DataItem) => {
+        const total = this.dataset.reduce((acc: number, item: DataItem) => {
+            return acc + item.value;
+        }, 0);
+
+        const value = dataItem.value / total * 100;
+
+        if (value === 100) {
+            return '100%';
+        }
+
+        return value.toFixed(2) + '%';
+    };
+
+    labelFormatting = (name: string) => {
+        const dataItem = this.dataset.find((item: DataItem) => item.name === name) as DataItem;
+        return `${name} (${this.formatPercent(dataItem)})`;
+    };
 
     onSelect(data: any): void {
         // console.log('Item clicked', JSON.parse(JSON.stringify(data)));

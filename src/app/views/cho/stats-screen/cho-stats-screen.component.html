@@ -11,20 +11,21 @@
     </div>
 
     <div class="content">
+        <br />
         <lmap-cho-stats-pie-chart
                 title="Top 10 Production Timespans"
                 *ngIf="filter.productionTime.show"
                 [dataset]="productionDataset"
                 [showLabels]="showProductionLabels"
         ></lmap-cho-stats-pie-chart>
-        <br />
+        <br /><br /><br />
         <lmap-cho-stats-pie-chart
                 title="Top 10 Finding Timespans"
                 *ngIf="filter.findingTime.show"
                 [dataset]="findingDataset"
                 [showLabels]="showFindingLabels"
         ></lmap-cho-stats-pie-chart>
-        <br />
+        <br /><br /><br />
         <lmap-cho-stats-pie-chart
                 title="Top 10 Collecting Timespans"
                 *ngIf="filter.collectingTime.show"

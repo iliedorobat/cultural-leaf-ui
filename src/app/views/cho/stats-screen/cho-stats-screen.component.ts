@@ -1,10 +1,10 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {DataItem} from '@swimlane/ngx-charts/lib/models/chart-data.model';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {TranslateService} from '@ngx-translate/core';
 
 import {BackendService} from '../../../shared/services/backend.service';
 import {CHOStatsFilter} from '../../../shared/types/cho/stats/CHOStatsFilter';
-import {CHOEventStatsEntry} from '../../../shared/types/cho/stats/CHOEventStats';
 
 @Component({
     selector: 'lmap-cho-stats-screen',
@@ -22,9 +22,9 @@ export class CHOStatsScreenComponent implements OnInit {
     @Input() resetActiveButtonId: Function;
 
     filter: CHOStatsFilter = new CHOStatsFilter();
-    collectingDataset: CHOEventStatsEntry[] = [];
-    findingDataset: CHOEventStatsEntry[] = [];
-    productionDataset: CHOEventStatsEntry[] = [];
+    collectingDataset: DataItem[] = [];
+    findingDataset: DataItem[] = [];
+    productionDataset: DataItem[] = [];
     showCollectingLabels: boolean = false;
     showFindingLabels: boolean = false;
     showProductionLabels: boolean = false;
